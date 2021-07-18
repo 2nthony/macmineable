@@ -13,3 +13,7 @@ macMineable is unMineable 3rd-party app that can let you mining cryptocurrency o
 ## Notice
 
 - Make sure your device on charging when mining.
+
+## LICENSE
+
+GNU GPL v3
