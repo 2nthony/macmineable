@@ -20,7 +20,7 @@
         @change="onCoinChange"
       >
         <el-option
-          v-for="coin in coins"
+          v-for="coin in supportedCoins"
           :key="coin[1]"
           :label="coin[0]"
           :value="coin[1]"
@@ -63,7 +63,7 @@ import { useRouter } from 'vue-router'
 import { useState } from '../state'
 import { getStorage, setStorage } from '../utils'
 import { startMining } from '../utils/mining-scripts'
-import { coins, referralCodeMap } from '../coins'
+import { coins, fetchCoins, getReferralCode } from '../coins'
 import TopButtons from '../components/TopButtons.vue'
 
 export default {
@@ -72,6 +72,7 @@ export default {
     const router = useRouter()
     const state = useState()
     const mineForm = ref()
+    const supportedCoins = ref(coins)
 
     function handleStart() {
       mineForm.value.validate((valid) => {
@@ -89,11 +90,15 @@ export default {
 
     function onCoinChange(v) {
       state.form.address = getStorage(v) || ''
-      state.form.referralCode = referralCodeMap[v]
+      state.form.referralCode = getReferralCode(supportedCoins.value, v)
     }
 
+    fetchCoins().then((supplyCoins) => {
+      supportedCoins.value = [...supportedCoins.value, ...supplyCoins]
+    })
+
     return {
-      coins,
+      supportedCoins,
       mineForm,
       state,
       handleStart,
