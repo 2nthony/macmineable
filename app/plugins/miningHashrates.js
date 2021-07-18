@@ -4,7 +4,7 @@ const hashrates = [0, 0]
 
 exports.apply = (api) => {
   api.emitter.on('miningLog', (log) => {
-    const hashrate = getHashrate(log)
+    const hashrate = this.getHashrate(log)
     if (hashrate) {
       hashrates.push(hashrate)
       if (hashrates.length > 10) {
@@ -24,7 +24,7 @@ exports.apply = (api) => {
   })
 }
 
-function getHashrate(log = '') {
+exports.getHashrate = (log = '') => {
   if (matchLog(log, 'miner')) {
     // [2021-06-13 19:25:39.756]  miner    speed 10s/60s/15m 353.6 n/a n/a H/s max 359.0 H/s
     const [, matched] = /speed(.*)max/.exec(log)
