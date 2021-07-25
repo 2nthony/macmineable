@@ -65,6 +65,9 @@ import { getStorage, setStorage } from '../utils'
 import { startMining } from '../utils/mining-scripts'
 import { coins, fetchCoins, getReferralCode } from '../coins'
 import TopButtons from '../components/TopButtons.vue'
+import { createToast } from 'vercel-toast'
+import 'vercel-toast/dist/vercel-toast.css'
+import { useEmitter } from '../emitter'
 
 export default {
   components: { TopButtons },
@@ -73,18 +76,43 @@ export default {
     const state = useState()
     const mineForm = ref()
     const supportedCoins = ref(coins)
+    const emitter = useEmitter()
 
     function handleStart() {
       mineForm.value.validate((valid) => {
         if (!valid) return
-        state.preparing = true
-        startMining(state.form).then(() => {
-          state.isMining = true
-          state.preparing = false
-          setStorage('form', state.form)
-          setStorage(state.form.type, state.form.address)
-          router.push('/mining')
-        })
+        // check address is valid on unMineable
+        fetch(
+          `https://api.unminable.com/v4/address/${state.form.address}?coin=${state.form.type}`,
+        )
+          .then((res) => res.json())
+          .then((res) => {
+            if (res.success) {
+              state.preparing = true
+              startMining(state.form).then(() => {
+                state.isMining = true
+                state.preparing = false
+                setStorage('form', state.form)
+                setStorage(state.form.type, state.form.address)
+                router.push('/mining')
+              })
+            } else {
+              createToast('Your address is invalid, please valid first.', {
+                type: 'error',
+                action: {
+                  text: 'Valid',
+                  callback: (toast) => {
+                    emitter.emit(
+                      'openURL',
+                      `https://unmineable.com/coins/${state.form.type}/address`,
+                    )
+                    toast.destory()
+                  },
+                },
+                cancel: 'Close',
+              })
+            }
+          })
       })
     }
 
