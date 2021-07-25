@@ -27,8 +27,11 @@ exports.apply = (api) => {
 exports.getHashrate = (log = '') => {
   if (matchLog(log, 'miner')) {
     // [2021-06-13 19:25:39.756]  miner    speed 10s/60s/15m 353.6 n/a n/a H/s max 359.0 H/s
-    const [, matched] = /speed(.*)max/.exec(log)
-    const [, speedPer10Second] = matched.trim().split(' ')
-    return Number(speedPer10Second)
+    const matchedMiningSpeed = /speed(.*)max/.exec(log)
+    if (matchedMiningSpeed) {
+      const [, matched] = matchedMiningSpeed
+      const [, speedPer10Second] = matched.trim().split(' ')
+      return Number(speedPer10Second)
+    }
   }
 }
