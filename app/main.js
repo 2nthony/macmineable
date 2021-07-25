@@ -26,7 +26,7 @@ app.whenReady().then(() => {
   let win = createWindow()
 
   app.on('activate', () => {
-    if (BrowserWindow.getAllWindows().length === 0) {
+    if (BrowserWindow.getAllWindows().length < 2) {
       win = createWindow()
     }
   })
