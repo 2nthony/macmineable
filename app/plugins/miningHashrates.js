@@ -11,7 +11,7 @@ exports.apply = (api) => {
         hashrates.splice(0, 1)
       }
 
-      api.win.webContents.send('miningHashrates', hashrates)
+      api.win?.webContents?.send('miningHashrates', hashrates)
       api.emitter.emit('miningHashrates', hashrates)
     }
   })
@@ -19,7 +19,7 @@ exports.apply = (api) => {
   api.emitter.on('pushHashrate', (hashrate) => {
     if (hashrates.every((hr) => hr === 0)) return
     hashrates.push(hashrate)
-    api.win.webContents.send('miningHashrates', hashrates)
+    api.win?.webContents?.send('miningHashrates', hashrates)
     api.emitter.emit('miningHashrates', hashrates)
   })
 }

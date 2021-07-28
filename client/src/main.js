@@ -13,6 +13,7 @@ import {
   ElTooltip,
   ElDialog,
   ElSlider,
+  ElIcon,
 } from 'element-plus'
 
 const app = createApp({
@@ -29,6 +30,7 @@ app
   .use(ElTooltip)
   .use(ElDialog)
   .use(ElSlider)
+  .use(ElIcon)
 
 const router = createRouter({
   history: createWebHashHistory(),

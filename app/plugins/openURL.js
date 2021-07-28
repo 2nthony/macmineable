@@ -5,7 +5,7 @@ exports.apply = (api) => {
     shell.openExternal(url)
   })
 
-  api.win.webContents.setWindowOpenHandler(({ url }) => {
+  api.win?.webContents?.setWindowOpenHandler(({ url }) => {
     shell.openExternal(url)
     return { action: 'deny' }
   })
