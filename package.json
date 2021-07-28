@@ -13,6 +13,7 @@
     "test": "ava --verbose"
   },
   "dependencies": {
+    "lodash.get": "^4.4.2",
     "mitt": "^3.0.0"
   },
   "devDependencies": {
