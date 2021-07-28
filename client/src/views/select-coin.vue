@@ -93,10 +93,10 @@ export default {
               startMining(state.form)
                 .then(() => {
                   state.isMining = true
-                  state.preparing = false
                   setStorage('form', state.form)
                   setStorage(state.form.type, state.form.address)
                   router.push('/mining')
+                  state.preparing = false
                 })
                 .catch(() => {
                   state.preparing = false
