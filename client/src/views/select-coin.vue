@@ -49,7 +49,7 @@
       <el-button
         type="primary"
         class="w-full"
-        :disabled="state.preparing"
+        :loading="state.preparing"
         @click="handleStart"
         >Start</el-button
       >
