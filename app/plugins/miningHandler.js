@@ -15,11 +15,11 @@ exports.apply = (api) => {
       api.emitter.emit('miningError')
     }
     if (type === 'miningStarted') {
-      api.win.webContents.send('miningStarted')
+      api.win?.webContents?.send('miningStarted')
       api.emitter.emit('miningStarted')
     }
     if (type === 'miningStopped') {
-      api.win.webContents.send('miningStopped')
+      api.win?.webContents?.send('miningStopped')
       api.emitter.emit('miningStopped')
       api.emitter.emit('pushHashrate', 0)
     }
