@@ -15,6 +15,7 @@ import { updateChecker } from './utils/updateChecker'
 import { miningHashrates } from './utils/miningHashrates'
 import { miningLog } from './utils/miningLog'
 import { openURL } from './utils/openURL'
+import { gtag } from './utils/gtag'
 import LayoutCollection from './layouts/LayoutCollection.vue'
 
 export default {
@@ -25,6 +26,7 @@ export default {
     miningLog()
     openURL()
     updateChecker()
+    gtag()
 
     const state = useState()
 
