@@ -10,7 +10,8 @@
     "make": "NODE_ENV=production electron-forge make",
     "build:release": "yarn build && yarn make",
     "build:logo": "electron-icon-builder --input=./app/assets/logo.png --output=./app",
-    "test": "ava --verbose"
+    "test": "ava --verbose",
+    "push": "git push && git push --tags"
   },
   "dependencies": {
     "mitt": "^3.0.0"
