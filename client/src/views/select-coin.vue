@@ -101,6 +101,9 @@ export default {
                 .catch(() => {
                   state.preparing = false
                 })
+                .finally(() => {
+                  state.preparing = false
+                })
             } else {
               createToast('Your address is invalid, please valid first.', {
                 type: 'error',
@@ -124,6 +127,9 @@ export default {
               type: 'error',
               cancel: 'Close',
             })
+          })
+          .finally(() => {
+            state.preparing = false
           })
       })
     }
