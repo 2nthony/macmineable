@@ -38,6 +38,7 @@ cp -r assets $OUT/$APP/Contents/Resources
 cp -r dist $OUT/$APP/Contents/Resources
 
 echo "Compressing '$APP'"
-zip -q -9 -r $OUT/$NAME-$VERSION.zip $OUT/$APP
+cd $OUT
+zip -q -9 -r $NAME-$VERSION.zip $APP
 
 echo "Done!"
