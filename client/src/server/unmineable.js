@@ -1,16 +1,10 @@
-// unmineable.com
 export const coins = [
-  fastCoin('Bitcoin', 'BTC', 'vsv5-arfz'),
   fastCoin('Ethereum', 'ETH', 'xngb-nrye'),
-  fastCoin('TetherUS', 'USDT', 'sjf5-7uc0'),
   fastCoin('Dogecoin', 'DOGE', '8jjv-jipu'),
-  fastCoin('Litecoin', 'LTC', 'ilzd-ytp8'),
   fastCoin('SHIBA', 'SHIB', 'c310-m2st'),
-  fastCoin('Aave', 'AAVE', 'kfsq-tyh6'),
-  fastCoin('Uniswap', 'UNI', 'lsc2-g97z'),
-  fastCoin('Sushi', 'SUSHI', 'li0t-fqk4'),
-  fastCoin('MATIC(Polygon)', 'MATIC', '2qbc-16fe'),
 ]
+
+const referralCode = 'xngb-nrye'
 
 export function getReferralCode(coins, symbol) {
   return coins.find((coin) => coin[1] === symbol)[2]
@@ -26,8 +20,33 @@ export function fetchCoins() {
           return coins.findIndex((coin) => coin[1] === unCoin.symbol) < 0
         })
         .map((supplyCoin) => {
-          return fastCoin(supplyCoin.name, supplyCoin.symbol, 'xngb-nrye')
+          return fastCoin(supplyCoin.name, supplyCoin.symbol, referralCode)
         })
+    })
+}
+
+export function validateAddress(symbol, address) {
+  // return Promise.resolve(true)
+  return fetch(`https://api.unminable.com/v4/address/${address}?coin=${symbol}`)
+    .then((res) => res.json())
+    .then((res) => !!res.success)
+}
+
+export function getBalance(symbol, address) {
+  if (!symbol || !address) {
+    return Promise.reject()
+  }
+
+  return fetch(
+    `https://api.unminable.com/v3/stats/${address}?tz=8&coin=${symbol}`,
+  )
+    .then((res) => res.json())
+    .then((res) => {
+      return {
+        pendingBalance: res.data.pending_balance,
+        total24h: res.data.total_24h,
+        totalPaid: res.data.total_paid,
+      }
     })
 }
 
