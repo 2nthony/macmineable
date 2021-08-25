@@ -35,7 +35,7 @@ func main() {
 	w.SetTitle("macMineable")
 	w.SetSize(400, 600, webview.HintFixed)
 
-	http.Handle("/", http.FileServer(http.Dir("views")))
+	http.Handle("/", http.FileServer(http.Dir("dist")))
 	httpListener, err := net.Listen("tcp", "127.0.0.1:13268")
 	if err != nil {
 		fmt.Println(err)
@@ -80,9 +80,9 @@ func bindClientEvents(w webview.WebView) {
 			return
 		}
 
-		minerPath := Ternay(IsIntel(), "miner/xmrig", "miner/xmrig-m1")
+		minerPath := Ternay(IsIntel(), "assets/miner/xmrig", "assets/miner/xmrig-m1")
 		process, err := RunCommand(
-			fmt.Sprintf(`%s --no-color --url=rx.unmineable.com:3333 --algo=rx --pass=x --keepalive --user=%s:%s.mac#%s --cpu-max-threads-hint=%s`, minerPath, form.Symbol, form.Address, form.ReferralCode, fmt.Sprint(form.CPUUsage)),
+			fmt.Sprintf(`%s --no-color --url=rx.unmineable.com:3333 --algo=rx --pass=x --keepalive --user=%s:%s.macMineable#%s --cpu-max-threads-hint=%s`, minerPath, form.Symbol, form.Address, form.ReferralCode, fmt.Sprint(form.CPUUsage)),
 			func(line string) {
 				w.Eval(fmt.Sprintf(`onMiningLog("%s")`, line))
 			},

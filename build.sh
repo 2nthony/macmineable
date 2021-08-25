@@ -33,8 +33,9 @@ echo "Building Go app"
 go build -o $OUT/$APP/Contents/MacOS/$NAME
 
 echo "Copying files"
-cp -r assets/ $OUT/$APP/Contents/Resources
-cp -r dist $OUT/$APP/Contents/Resources/views
+cp -r icon.icns $OUT/$APP/Contents/Resources
+cp -r assets $OUT/$APP/Contents/Resources
+cp -r dist $OUT/$APP/Contents/Resources
 
 echo "Compressing '$APP'"
 zip -q -9 -r $OUT/$NAME-$VERSION.zip $OUT/$APP
