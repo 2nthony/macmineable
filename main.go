@@ -16,13 +16,15 @@ import (
 
 func main() {
 	// start: make the root dir is the `Resources`, global effected!
-	ep, err := os.Executable()
-	if err != nil {
-		fmt.Println("os.Executable:", err)
-	}
-	err = os.Chdir(filepath.Join(filepath.Dir(ep), "..", "Resources"))
-	if err != nil {
-		fmt.Println("os.Chdir:", err)
+	if isRunBuild() {
+		ep, err := os.Executable()
+		if err != nil {
+			fmt.Println("os.Executable:", err)
+		}
+		err = os.Chdir(filepath.Join(filepath.Dir(ep), "..", "Resources"))
+		if err != nil {
+			fmt.Println("os.Chdir:", err)
+		}
 	}
 	// end
 
