@@ -30,7 +30,7 @@ func main() {
 
 	defer w.Destroy()
 
-	bindClientEvents(w)
+	registerIpcEmitters(w)
 
 	w.SetTitle("macMineable")
 	w.SetSize(400, 600, webview.HintFixed)
@@ -49,7 +49,7 @@ func main() {
 }
 
 // client events
-func bindClientEvents(w webview.WebView) {
+func registerIpcEmitters(w webview.WebView) {
 	var miningProcess *exec.Cmd
 
 	w.Bind("emitPageReady", func() {
