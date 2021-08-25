@@ -2,10 +2,15 @@
 # https://xie.infoq.cn/article/4b954f196d6d4a288c8c6981c
 
 NAME="macMineable"
+OUT="out"
 APP="$NAME.app"
-mkdir -p $APP/Contents/{MacOS,Resources}
-go build -o $APP/Contents/MacOS/$NAME
-cat > $APP/Contents/Info.plist << EOF
+VERSION=$(sed -n 's/.*"version": "\(.*\)",/\1/p' package.json)
+
+echo "Creating macOS app structure"
+mkdir -p $OUT/$APP/Contents/{MacOS,Resources}
+
+echo "Writing 'Info.plist'"
+cat > $OUT/$APP/Contents/Info.plist << EOF
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -23,6 +28,15 @@ cat > $APP/Contents/Info.plist << EOF
 </dict>
 </plist>
 EOF
-cp -r assets/ $APP/Contents/Resources
-cp -r dist $APP/Contents/Resources/views
-find $APP
+
+echo "Building Go app"
+go build -o $OUT/$APP/Contents/MacOS/$NAME
+
+echo "Copying files"
+cp -r assets/ $OUT/$APP/Contents/Resources
+cp -r dist $OUT/$APP/Contents/Resources/views
+
+echo "Compressing '$APP'"
+zip -q -9 -r $OUT/$NAME-$VERSION.zip $OUT/$APP
+
+echo "Done!"
