@@ -13,6 +13,7 @@
   import TopButtons from '../components/TopButtons.svelte'
   import { log } from '../util/log'
   import { getHashrate } from '../util/mining'
+  import Link from '../components/Link.svelte'
 
   let form
   store.form.subscribe((data) => (form = data))
@@ -199,17 +200,11 @@
           content="Please considering buy me a coffee, it's important to me 🙏"
           placement="top"
         >
-          <p
-            on:click={() => {
-              ipc.send(
-                'emitOpenURL',
-                'https://2nthony.notion.site/Buy-2nthony-Coffee-d67a508cd58e4896bfb50c7112f93f51',
-              )
-            }}
-            class="text-xs text-gray-500 m-0 cursor-pointer"
+          <Link
+            url="https://2nthony.notion.site/Buy-2nthony-Coffee-d67a508cd58e4896bfb50c7112f93f51"
+            class="text-xs text-gray-500 m-0 underline hover:text-indigo-500"
+            >BuyMeACoffee 🙏</Link
           >
-            <span class="underline hover:text-indigo-500">BuyMeACoffee</span> 🙏
-          </p>
         </sl-tooltip>
       </div>
       <div class="flex items-center">

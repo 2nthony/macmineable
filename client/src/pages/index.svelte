@@ -1,11 +1,18 @@
 <script>
   import '@shoelace-style/shoelace/dist/components/button/button'
+  import Link from '../components/Link.svelte'
   import RouterLink from '../components/RouterLink.svelte'
 </script>
 
 <hgroup>
   <h1 class="text-indigo-500">macMineable</h1>
-  <h6 class="text-xs text-green-500">powered by unMineable</h6>
+  <h6 class="text-xs text-green-500">
+    3rd-party unMineable for macOS. Made by
+    <Link
+      url="https://twitter.com/evillt"
+      class="underline hover:text-indigo-500">2nthony</Link
+    >.
+  </h6>
 </hgroup>
 
 <p class="text-sm">
