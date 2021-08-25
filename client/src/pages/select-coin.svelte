@@ -22,6 +22,8 @@
   import TopButtons from '../components/TopButtons.svelte'
   import { log } from '../util/log'
 
+  let form
+  store.form.subscribe((val) => (form = val))
   let preparing
   store.preparing.subscribe((bool) => (preparing = bool))
 
@@ -35,20 +37,18 @@
 
     store.preparing.set(true)
 
+    log('page select-coin:', 'validating address')
+
     const formData = event.detail.formData
-    store.form.update((value) => ({
-      ...value,
-      ...parseFormData(formData),
-    }))
-
-    const form = store.get(store.form)
-    setStorage('form', form)
-    setStorage(form.symbol, form.address)
-
-    log('page select-coin:', 'validate address')
-    validateAddress(form.symbol, form.address)
+    const data = parseFormData(formData)
+    validateAddress(data.symbol, data.address)
       .then((isExist) => {
         if (isExist) {
+          store.form.update((value) => ({ ...value, ...data }))
+
+          setStorage('form', form)
+          setStorage(form.symbol, form.address)
+
           ipc.listen('onMiningStarted', () => {
             store.preparing.set(false)
             store.isMining.set(true)
