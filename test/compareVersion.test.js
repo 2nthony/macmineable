@@ -1,5 +1,5 @@
 import test from 'ava'
-import { compareVersion } from '../client/src/utils/compareVersion'
+import { compareVersion } from '../client/src/util/compareVersion'
 
 test('compare version', (t) => {
   t.is(compareVersion('0.6.2', '0.7.0'), false)
