@@ -1,13 +1,14 @@
 <script>
-  import { onMount, createEventDispatcher } from 'svelte'
+  import { onMount } from 'svelte'
   import { listen } from 'svelte/internal'
   import '@shoelace-style/shoelace/dist/components/form/form'
   import '@shoelace-style/shoelace/dist/components/range/range'
 
   import * as store from '../store'
   import * as formUtils from '../util/form'
+  import { useDispatch } from '../use/dispatch'
 
-  const dispatch = createEventDispatcher()
+  const { dispatch } = useDispatch()
 
   let form
   store.form.subscribe((val) => (form = val))

@@ -1,10 +1,11 @@
 <script>
   import { onMount } from 'svelte'
-  import { createEventDispatcher, listen } from 'svelte/internal'
+  import { listen } from 'svelte/internal'
   import '@shoelace-style/shoelace/dist/components/drawer/drawer'
   import '@shoelace-style/shoelace/dist/components/button/button'
+  import { useDispatch } from '../use/dispatch'
 
-  const dispatch = createEventDispatcher()
+  const { dispatch } = useDispatch()
 
   export let title = 'Drawer'
   export let fullscreen = false
