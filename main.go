@@ -38,7 +38,8 @@ func main() {
 	w.SetSize(400, 600, webview.HintFixed)
 
 	http.Handle("/", http.FileServer(http.Dir("dist")))
-	httpListener, err := net.Listen("tcp", "127.0.0.1:0")
+	// can not use dynamic port, because client-side uses `localstorage`
+	httpListener, err := net.Listen("tcp", "127.0.0.1:47261")
 	if err != nil {
 		fmt.Println(err)
 	}
