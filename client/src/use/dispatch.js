@@ -4,15 +4,15 @@
 import { createEventDispatcher } from 'svelte'
 
 export function useDispatch() {
+  const dispatch = createEventDispatcher()
+  function d(type) {
+    return (detail) => dispatch(type, detail)
+  }
+
   return {
-    click: fast('click'),
-    dispatch(type, ...args) {
-      fast(type)(...args)
+    click: d('click'),
+    dispatch(type, detail) {
+      d(type)(detail)
     },
   }
-}
-
-function fast(type) {
-  const dispatch = createEventDispatcher()
-  return (...args) => dispatch(type, ...args)
 }
