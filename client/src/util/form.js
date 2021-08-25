@@ -8,8 +8,10 @@ export function parseFormData(formData, transform = (data) => data) {
 }
 
 export function setFormData(formEl, data) {
+  if (!data) return
+
   formEl.childNodes.forEach((el) => {
-    if (el.name) {
+    if (el.name && data[el.name]) {
       el.value = data[el.name]
     }
   })
