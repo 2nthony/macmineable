@@ -2,4 +2,3 @@ node_modules
 .ds_store
 out/
 dist/
-macMineable.app
