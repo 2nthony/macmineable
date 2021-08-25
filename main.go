@@ -36,7 +36,7 @@ func main() {
 	w.SetSize(400, 600, webview.HintFixed)
 
 	http.Handle("/", http.FileServer(http.Dir("dist")))
-	httpListener, err := net.Listen("tcp", "127.0.0.1:13268")
+	httpListener, err := net.Listen("tcp", "127.0.0.1:0")
 	if err != nil {
 		fmt.Println(err)
 	}
