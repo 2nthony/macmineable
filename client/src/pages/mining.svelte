@@ -3,7 +3,7 @@
   import '@shoelace-style/shoelace/dist/components/tooltip/tooltip'
   import { onMount } from 'svelte'
   import * as store from '../store'
-  import { getBalance } from '../server/unmineable'
+  import { getBalance } from '../server/unMineable'
   import IconRefresh from '../components/icons/Refresh.svelte'
   import { ipc } from '../ipc'
   import * as router from 'svelte-spa-router'

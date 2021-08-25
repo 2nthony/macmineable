@@ -1,28 +1,25 @@
-export const coins = [
+import { apiv4coin } from './unMineableCoins'
+
+const referralCode = 'xngb-nrye'
+
+const presetCoins = [
   fastCoin('Ethereum', 'ETH', 'xngb-nrye'),
   fastCoin('Dogecoin', 'DOGE', '8jjv-jipu'),
   fastCoin('SHIBA', 'SHIB', 'c310-m2st'),
 ]
 
-const referralCode = 'xngb-nrye'
+export const unMineableCoins = presetCoins.concat(
+  apiv4coin.data
+    .filter((unCoin) => {
+      return presetCoins.findIndex((coin) => coin[1] === unCoin.symbol) < 0
+    })
+    .map((supplyCoin) => {
+      return fastCoin(supplyCoin.name, supplyCoin.symbol, referralCode)
+    }),
+)
 
 export function getReferralCode(coins, symbol) {
   return coins.find((coin) => coin[1] === symbol)[2]
-}
-
-export function fetchCoins() {
-  return fetch('https://api.unminable.com/v4/coin')
-    .then((res) => res.json())
-    .then((res) => {
-      const data = res.data
-      return data
-        .filter((unCoin) => {
-          return coins.findIndex((coin) => coin[1] === unCoin.symbol) < 0
-        })
-        .map((supplyCoin) => {
-          return fastCoin(supplyCoin.name, supplyCoin.symbol, referralCode)
-        })
-    })
 }
 
 export function validateAddress(symbol, address) {

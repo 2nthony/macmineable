@@ -12,19 +12,15 @@
 
   import { ipc } from '../ipc'
   import {
-    coins,
-    fetchCoins,
+    unMineableCoins,
     getReferralCode,
     validateAddress,
-  } from '../server/unmineable'
+  } from '../server/unMineable'
   import * as store from '../store'
   import { parseFormData, setFormData } from '../util/form'
   import { getStorage, setStorage } from '../util/storage'
   import TopButtons from '../components/TopButtons.svelte'
   import { log } from '../util/log'
-
-  let supportedCoins = []
-  fetchCoins().then((fetchedCoins) => (supportedCoins = fetchedCoins))
 
   let preparing
   store.preparing.subscribe((bool) => (preparing = bool))
@@ -95,10 +91,7 @@
   function onSelectCoinChange(event) {
     const selectedSymbol = event.target.value
     inputAddressEl.value = getStorage(selectedSymbol) || ''
-    inputReferralCodeEl.value = getReferralCode(
-      [...coins, ...supportedCoins],
-      selectedSymbol,
-    )
+    inputReferralCodeEl.value = getReferralCode(unMineableCoins, selectedSymbol)
   }
 
   onMount(() => {
@@ -121,25 +114,12 @@
     required
     bind:this={selectCoinEl}
   >
-    {#each coins as coin (coin[1])}
+    {#each unMineableCoins as coin (coin[1])}
       <sl-menu-item value={coin[1]}>
         <img slot="prefix" class="w-6 mr-2" src={coin[3]} alt={coin[1]} />
         {coin[0]}
       </sl-menu-item>
     {/each}
-
-    {#if supportedCoins.length}
-      {#each supportedCoins as coin (coin[1])}
-        <sl-menu-item value={coin[1]}>
-          <img slot="prefix" class="w-6 mr-2" src={coin[3]} alt={coin[1]} />
-          {coin[0]}
-        </sl-menu-item>
-      {/each}
-    {:else}
-      <sl-menu-item disabled value="fetchingCoins"
-        >Fetching coins...</sl-menu-item
-      >
-    {/if}
   </sl-select>
 
   <sl-input
