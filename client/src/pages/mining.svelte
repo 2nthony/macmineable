@@ -187,7 +187,7 @@
       <div class="text-gray-500">Current Hashrate</div>
       <div class="text-4xl flex items-center">
         {#if isMining && !currentHashrate}
-          <span class="text-gray-600">Calculating...</span>
+          <span class="text-gray-600">Starting...</span>
         {:else}
           <span>{currentHashrate || 0}</span>
         {/if}
@@ -237,6 +237,6 @@
 <Drawer fullscreen bind:this={logDrawerEl} title="Logs">
   <pre
     class="h-full p-4 overflow-scroll select-text bg-gray-50">
-    {miningLogs.join('\n') ||'No logs'}
+    {miningLogs.join('\n') || 'Pending logs...'}
   </pre>
 </Drawer>
