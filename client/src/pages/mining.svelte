@@ -190,7 +190,7 @@
         {#if isMining && !currentHashrate}
           <span class="text-gray-600">Starting...</span>
         {:else}
-          <span>{currentHashrate || 0} H/s</span>
+          <span>{currentHashrate || 0} h</span>
         {/if}
       </div>
     </div>
