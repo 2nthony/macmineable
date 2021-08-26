@@ -12,8 +12,6 @@ macMineable is the unMineable 3rd-party app that can let you mining cryptocurren
 
 ## Highlights
 
-> Tested on Macbook Pro 2015 with Intel chip.
-
 - [x] Written in Go and Svelte
 - [x] XMRig under the hood
 - [x] Fast and light
@@ -21,7 +19,7 @@ macMineable is the unMineable 3rd-party app that can let you mining cryptocurren
 - [x] All unMineable coins are supported
 - [x] Tweak CPU usage for mining
 - [x] Check new release available
-- [x] Memorize form
+- [x] Form memorize
 - [ ] Log reporter
 
 ## Download
@@ -33,6 +31,19 @@ Download in [Releases page](https://github.com/evillt/macmineable-release/releas
 Since `v0.10.0` you need to read [this release](https://github.com/evillt/macmineable-release/releases/tag/v0.10.0).
 
 We create a webserver with the host `127.0.0.1:47261` to render the UI, so make sure this host is not occupied.
+
+### Tested devices
+
+- Macbook Pro 2015 with Intel I5 chip, big sur 11.5.2
+- Macbook 12-inch with Intel M-5Y31 chip, big sur 11.1
+
+### Unidentified developer
+
+The only reason is I'm NOT an Apple Developer.  
+You can open it anyway. The app itself doesn't includes any harmful code.
+
+> Go Setting Preferences > Security & Privacy > Open anyway
+> ![](https://cdn.jsdelivr.net/gh/evillt/github-itself-image-hosting-service@main/uPic/TI6dvMsTREFI.jpg)
 
 ## LICENSE
 
