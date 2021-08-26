@@ -3,15 +3,14 @@ package main
 import (
 	"fmt"
 	"os"
-	"regexp"
 	"strings"
 
 	. "github.com/klauspost/cpuid/v2"
 )
 
 func IsIntel() bool {
-	validID := regexp.MustCompile(`(?i)^intel`)
-	return validID.MatchString(CPU.BrandName)
+	fmt.Printf("CPU.BrandName: %v\n", CPU.BrandName)
+	return strings.Contains(CPU.BrandName, "Intel")
 }
 
 func Ternay(cond bool, res1 interface{}, res2 interface{}) interface{} {
