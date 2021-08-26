@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-func asyncLog(reader io.ReadCloser, cb func(line string)) error {
+func asyncLog(reader io.ReadCloser) error {
 	bucket := make([]byte, 1024)
 	buffer := make([]byte, 1024)
 	for {
@@ -35,17 +35,21 @@ func asyncLog(reader io.ReadCloser, cb func(line string)) error {
 					bucket = bucket[:0]
 				}
 				fmt.Printf("%s\n", line)
-				cb(line)
+				eventbus.Publish("cmd:log", line)
 			}
-
 		}
 	}
 }
 
-func RunCommand(c string, cb func(line string)) (*exec.Cmd, error) {
+func RunCommand(c string) (*exec.Cmd, error) {
 	cmd := exec.Command("bash", "-c", c)
+	fmt.Printf("cmd.Args: %v\n", cmd.Args)
 
-	stdout, _ := cmd.StdoutPipe()
+	stdout, stdoutErr := cmd.StdoutPipe()
+	if stdoutErr != nil {
+		fmt.Printf("stdoutErr: %v\n", stdoutErr)
+		return cmd, stdoutErr
+	}
 	// stderr, _ := cmd.StderrPipe()
 
 	if err := cmd.Start(); err != nil {
@@ -53,7 +57,7 @@ func RunCommand(c string, cb func(line string)) (*exec.Cmd, error) {
 		return cmd, err
 	}
 
-	go asyncLog(stdout, cb)
+	go asyncLog(stdout)
 	// go asyncLog(stderr)
 
 	/* if err := cmd.Wait(); err != nil {

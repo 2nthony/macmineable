@@ -10,29 +10,30 @@ import (
 	"path/filepath"
 	"runtime"
 
+	"github.com/asaskevich/EventBus"
 	"github.com/evillt/webview"
 	"github.com/pkg/browser"
 )
 
-func main() {
-	// start: make the root dir is the `Resources`, global effected!
-	if isRunBuild() {
-		ep, err := os.Executable()
-		if err != nil {
-			fmt.Println("os.Executable:", err)
-		}
-		err = os.Chdir(filepath.Join(filepath.Dir(ep), "..", "Resources"))
-		if err != nil {
-			fmt.Println("os.Chdir:", err)
-		}
-	}
-	// end
+var eventbus = EventBus.New()
 
+func main() {
 	w := webview.New(true)
 
 	defer w.Destroy()
 
-	registerIpcEmitters(w)
+	registerIPCEvents(w)
+
+	// start: make the root dir is the `Resources`, global effected!
+	ep, err := os.Executable()
+	if err != nil {
+		fmt.Println("os.Executable:", err)
+	}
+	err = os.Chdir(filepath.Join(filepath.Dir(ep), "..", "Resources"))
+	if err != nil {
+		fmt.Println("os.Chdir:", err)
+	}
+	// end
 
 	w.SetTitle("macMineable")
 	w.SetSize(400, 600, webview.HintFixed)
@@ -52,18 +53,21 @@ func main() {
 }
 
 // client events
-func registerIpcEmitters(w webview.WebView) {
+func registerIPCEvents(w webview.WebView) {
 	var miningProcess *exec.Cmd
+	minerPath := Ternay(IsIntel(), "assets/miner/xmrig", "assets/miner/xmrig-m1")
 
 	w.Bind("emitPageReady", func() {
 		fmt.Println("emitPageReady")
-		w.Eval(fmt.Sprintf(`
-      onPageReady({
-        cpuCores: %s
-      })
-      `,
-			fmt.Sprint(runtime.NumCPU()),
-		))
+		w.Dispatch(func() {
+			w.Eval(fmt.Sprintf(`
+        onPageReady({
+          cpuCores: %s
+        })
+        `,
+				fmt.Sprint(runtime.NumCPU()),
+			))
+		})
 	})
 
 	type Form struct {
@@ -76,26 +80,36 @@ func registerIpcEmitters(w webview.WebView) {
 		var form Form
 		json.Unmarshal([]byte(data), &form)
 
-		fmt.Println(form)
+		fmt.Printf("form: %v\n", form)
 
 		if miningProcess != nil {
-			w.Eval("onMiningStarted()")
+			w.Dispatch(func() {
+				w.Eval("onMiningStarted()")
+			})
 			return
 		}
 
-		minerPath := Ternay(IsIntel(), "assets/miner/xmrig", "assets/miner/xmrig-m1")
 		process, err := RunCommand(
 			fmt.Sprintf(`%s --no-color --url=rx.unmineable.com:3333 --algo=rx --pass=x --keepalive --user=%s:%s.macMineable#%s --cpu-max-threads-hint=%s`, minerPath, form.Symbol, form.Address, form.ReferralCode, fmt.Sprint(form.CPUUsage)),
-			func(line string) {
-				w.Eval(fmt.Sprintf(`onMiningLog("%s")`, line))
-			},
 		)
 		if err != nil {
-			w.Eval(fmt.Sprintf(`onMiningStartedError("%s")`, err))
+			w.Dispatch(func() {
+				w.Eval(fmt.Sprintf(`onMiningStartedError("%s")`, err))
+			})
 			return
 		}
 
-		w.Eval("onMiningStarted()")
+		w.Dispatch(func() {
+			w.Eval("onMiningStarted()")
+		})
+
+		eventbus.Subscribe("cmd:log", func(line string) {
+			// https://github.com/webview/webview/issues/248
+			// prevent routine in low-perform machine, e.g. Macbook 12-inch with Intel M-5Y31 chip
+			w.Dispatch(func() {
+				w.Eval(fmt.Sprintf(`onMiningLog("%s")`, line))
+			})
+		})
 
 		miningProcess = process
 	})
@@ -103,8 +117,10 @@ func registerIpcEmitters(w webview.WebView) {
 		if miningProcess != nil {
 			// prefer kill the process
 			miningProcess.Process.Kill()
-			w.Eval("onMiningStopped()")
 			miningProcess = nil
+			w.Dispatch(func() {
+				w.Eval("onMiningStopped()")
+			})
 			/* err := miningProcess.Process.Signal(os.Interrupt)
 						if err != nil {
 							w.Eval(fmt.Sprintf("onMiningStoppedError(%s)", err))
