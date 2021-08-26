@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import styleImport from 'vite-plugin-style-import'
+import { svelte } from '@sveltejs/vite-plugin-svelte'
 import path from 'path'
+import sveltePreprocess from 'svelte-preprocess'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -11,21 +11,8 @@ export default defineConfig({
     emptyOutDir: true,
   },
   plugins: [
-    vue(),
-    styleImport({
-      libs: [
-        {
-          libraryName: 'element-plus',
-          esModule: true,
-          ensureStyleFile: true,
-          resolveStyle: (name) => {
-            return `element-plus/lib/theme-chalk/${name}.css`
-          },
-          resolveComponent: (name) => {
-            return `element-plus/lib/${name}`
-          },
-        },
-      ],
+    svelte({
+      preprocess: sveltePreprocess(),
     }),
   ],
 })

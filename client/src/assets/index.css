@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Nunito';
+  src: url('./Nunito-Regular.ttf'), url('./Nunito-SemiBold.ttf');
+}
+
+body {
+  @apply text-gray-900 select-none;
+  font-family: 'Nunito';
+}
+
+h1,
+h2,
+h3,
+h4 {
+  @apply mb-4 font-semibold;
+}
+
+h1 {
+  @apply md:text-5xl text-4xl mt-10;
+}
+
+h2 {
+  @apply md:text-3xl text-2xl mt-8;
+}
+
+h3 {
+  @apply md:text-2xl text-xl mt-6;
+}
+
+h4 {
+  @apply md:text-xl text-lg mt-4 font-medium;
+}
+
+p {
+  @apply my-4;
+}
+
+hr {
+  @apply my-8 border-gray-200;
+}

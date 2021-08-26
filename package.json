@@ -1,87 +1,30 @@
 {
-  "name": "macMineable",
+  "name": "macmineable",
   "version": "0.8.3",
-  "main": "app/main.js",
   "scripts": {
     "dev": "vite",
-    "build": "vite build --base ./",
-    "start": "electron-forge start",
-    "package": "NODE_ENV=production electron-forge package",
-    "make": "NODE_ENV=production electron-forge make",
-    "build:release": "yarn build && yarn make",
-    "build:logo": "electron-icon-builder --input=./app/assets/logo.png --output=./app",
+    "build": "vite build",
     "test": "ava --verbose",
     "push": "git push && git push --tags"
   },
   "dependencies": {
-    "mitt": "^3.0.0"
+    "@shoelace-style/shoelace": "^2.0.0-beta.48",
+    "c3": "^0.7.20",
+    "lodash.isequal": "^4.5.0",
+    "svelte-spa-router": "^3.2.0",
+    "tinykeys": "^1.2.0",
+    "vercel-toast": "^1.5.3"
   },
   "devDependencies": {
-    "@electron-forge/cli": "^6.0.0-beta.55",
-    "@electron-forge/maker-deb": "^6.0.0-beta.55",
-    "@electron-forge/maker-rpm": "^6.0.0-beta.55",
-    "@electron-forge/maker-squirrel": "^6.0.0-beta.55",
-    "@electron-forge/maker-zip": "^6.0.0-beta.55",
-    "@vitejs/plugin-vue": "^1.2.2",
-    "@vue/compiler-sfc": "^3.0.11",
-    "autoprefixer": "^10.2.5",
+    "@sveltejs/vite-plugin-svelte": "^1.0.0-next.19",
+    "autoprefixer": "^10.3.2",
     "ava": "^3.15.0",
-    "c3": "^0.7.20",
-    "electron": "^12.0.8",
-    "electron-builder": "^22.10.5",
-    "electron-icon-builder": "^2.0.1",
-    "electron-squirrel-startup": "^1.0.0",
-    "element-plus": "^1.0.2-beta.44",
     "esm": "^3.2.25",
-    "lodash.isequal": "^4.5.0",
-    "postcss": "^8.2.15",
-    "tailwindcss": "^2.1.2",
-    "uuid": "^8.3.2",
-    "vercel-toast": "^1.5.3",
-    "vite": "^2.3.3",
-    "vite-plugin-style-import": "^0.10.0",
-    "vue": "^3.0.11",
-    "vue-remix-icons": "^1.1.1",
-    "vue-router": "^4.0.8"
-  },
-  "config": {
-    "forge": {
-      "packagerConfig": {
-        "icon": "app/icons/mac/icon.icns",
-        "ignore": [
-          "node_modules/.cache",
-          "node_modules/.ignored",
-          "node_modules/.vite",
-          "node_modules/.yarn-integrity",
-          "test",
-          "client",
-          "yarn.lock",
-          "vite.config.js"
-        ]
-      },
-      "makers": [
-        {
-          "name": "@electron-forge/maker-squirrel",
-          "config": {
-            "name": ""
-          }
-        },
-        {
-          "name": "@electron-forge/maker-zip",
-          "platforms": [
-            "darwin"
-          ]
-        },
-        {
-          "name": "@electron-forge/maker-deb",
-          "config": {}
-        },
-        {
-          "name": "@electron-forge/maker-rpm",
-          "config": {}
-        }
-      ]
-    }
+    "postcss": "^8.3.6",
+    "svelte": "^3.42.3",
+    "svelte-preprocess": "^4.8.0",
+    "tailwindcss": "^2.2.7",
+    "vite": "^2.5.1"
   },
   "ava": {
     "require": [
