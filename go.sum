@@ -1,3 +1,5 @@
+github.com/asaskevich/EventBus v0.0.0-20200907212545-49d423059eef h1:2JGTg6JapxP9/R33ZaagQtAM4EkkSYnIAlOG5EI8gkM=
+github.com/asaskevich/EventBus v0.0.0-20200907212545-49d423059eef/go.mod h1:JS7hed4L1fj0hXcyEejnW57/7LCetXggd+vwrRnYeII=
 github.com/evillt/webview v0.0.0-20210821151613-9ae68d931b8a h1:mhzDdRaX2rM8DrxIHyJrSMae9w7FzX+2Xp46BJ+QPio=
 github.com/evillt/webview v0.0.0-20210821151613-9ae68d931b8a/go.mod h1:J7/NGqXtTwMDgs6FRaw4Fm65mPn2zvLnWHU/UKAsL4s=
 github.com/klauspost/cpuid/v2 v2.0.9 h1:lgaqFMSdTdQYdZ04uHyN2d/eKdOMyi2YLSvlQIBFYa4=

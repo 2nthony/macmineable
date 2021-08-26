@@ -8,6 +8,7 @@ require (
 )
 
 require (
+	github.com/asaskevich/EventBus v0.0.0-20200907212545-49d423059eef
 	github.com/klauspost/cpuid/v2 v2.0.9
 	golang.org/x/sys v0.0.0-20210616045830-e2b7044e8c71 // indirect
 )
