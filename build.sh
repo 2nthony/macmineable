@@ -6,6 +6,8 @@ OUT="out"
 APP="$NAME.app"
 VERSION=$(sed -n 's/.*"version": "\(.*\)",/\1/p' package.json)
 
+rm -r $OUT/$APP
+
 echo "Creating macOS app structure"
 mkdir -p $OUT/$APP/Contents/{MacOS,Resources}
 
