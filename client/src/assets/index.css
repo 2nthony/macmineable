@@ -1,10 +1,15 @@
-/* ./src/index.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Nunito';
+  src: url('./Nunito-Regular.ttf'), url('./Nunito-SemiBold.ttf');
+}
+
 body {
   @apply text-gray-900 select-none;
+  font-family: 'Nunito';
 }
 
 h1,

@@ -1,5 +1,5 @@
 <script>
-  import './index.css'
+  import './assets/index.css'
   import '@shoelace-style/shoelace/dist/themes/light.css'
 
   import { routes, Router } from './router'
