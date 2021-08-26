@@ -144,7 +144,7 @@
 
   <sl-button
     type="primary"
-    class="mt-10 w-full"
+    class="mt-4 w-full"
     submit
     loading={preparing}
     disabled={preparing}>Start</sl-button
