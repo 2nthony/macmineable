@@ -36,6 +36,7 @@ We create a webserver with the host `127.0.0.1:47261` to render the UI, so make 
 
 - Macbook Pro 2015 with Intel I5 chip, big sur 11.5.2
 - Macbook 12-inch with Intel M-5Y31 chip, big sur 11.1
+- Thanks to [yoobanz.crypto](https://twitter.com/yoobandz) helping me tested on M1 device. https://twitter.com/yoobandz/status/1430951939177603079
 
 ### Unidentified developer
 
@@ -44,6 +45,10 @@ You can open it anyway. The app itself doesn't includes any harmful code.
 
 > Go Setting Preferences > Security & Privacy > Open anyway
 > ![](https://cdn.jsdelivr.net/gh/evillt/github-itself-image-hosting-service@main/uPic/TI6dvMsTREFI.jpg)
+
+### Don't quit the app is mining
+
+Press the `Stop` button first. If you did, read [this](https://github.com/evillt/macmineable-release/issues/10).
 
 ## LICENSE
 
