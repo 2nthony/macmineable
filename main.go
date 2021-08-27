@@ -17,13 +17,16 @@ import (
 
 var eventbus = EventBus.New()
 
+const (
+	httpHost = "127.0.0.1"
+	httpPort = "47261"
+)
+
 func main() {
-	w := webview.New(true)
+	runApp()
+}
 
-	defer w.Destroy()
-
-	registerIPCEvents(w)
-
+func runApp() {
 	// start: make the root dir is the `Resources`, global effected!
 	ep, err := os.Executable()
 	if err != nil {
@@ -35,12 +38,25 @@ func main() {
 	}
 	// end
 
+	w := webview.New(true)
+	defer w.Destroy()
+
+	registerIPCEvents(w)
+
 	w.SetTitle("macMineable")
 	w.SetSize(400, 600, webview.HintFixed)
 
+	httpListener := serveUI()
+
+	w.Navigate(fmt.Sprintf("http://%s/", httpListener.Addr()))
+
+	w.Run()
+}
+
+func serveUI() net.Listener {
 	http.Handle("/", http.FileServer(http.Dir("dist")))
-	// can not use dynamic port, because client-side uses `localstorage`
-	httpListener, err := net.Listen("tcp", "127.0.0.1:47261")
+	// Fixed http port because client-side uses `localstorage`
+	httpListener, err := net.Listen("tcp", fmt.Sprintf("%s:%s", httpHost, httpPort))
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -48,8 +64,7 @@ func main() {
 		fmt.Println(http.Serve(httpListener, nil))
 	}()
 
-	w.Navigate(fmt.Sprintf("http://%s/", httpListener.Addr()))
-	w.Run()
+	return httpListener
 }
 
 // client events
