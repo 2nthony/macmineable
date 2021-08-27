@@ -36,7 +36,7 @@ We create a webserver with the host `127.0.0.1:47261` to render the UI, so make 
 
 - Macbook Pro 2015 with Intel I5 chip, big sur 11.5.2
 - Macbook 12-inch with Intel M-5Y31 chip, big sur 11.1
-- Thanks to [yoobanz.crypto](https://twitter.com/yoobandz) helping me tested on M1 device. https://twitter.com/yoobandz/status/1430951939177603079
+- Thanks to [@yoobanz](https://twitter.com/yoobandz) helping me tested on M1 device. https://twitter.com/yoobandz/status/1430951939177603079
 
 ### Unidentified developer
 
