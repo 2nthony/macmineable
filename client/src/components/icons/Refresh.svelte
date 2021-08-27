@@ -19,7 +19,7 @@
   on:click={click}
   ><g
     fill="none"
-    stroke="#000"
+    stroke="currentColor"
     stroke-width="4"
     stroke-linecap="round"
     stroke-linejoin="round"
