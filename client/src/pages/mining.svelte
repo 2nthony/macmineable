@@ -165,16 +165,13 @@
           <span>{form.symbol || ''}</span>
         </div>
         <div class="flex flex-col">
-          <p class="m-0 text-gray-500 text-sm">
-            Last 24h Reward:
-            <span class="text-black font-semibold">{balance.total24h || 0}</span
-            >
+          <p class="m-0 text-sm">
+            <span class="text-gray-500">Last 24h Reward:</span>
+            <span class="font-semibold">{balance.total24h || 0}</span>
           </p>
-          <p class="m-0 text-gray-500 text-sm">
-            Total Paid:
-            <span class="text-black font-semibold"
-              >{balance.totalPaid || 0}</span
-            >
+          <p class="m-0 text-sm">
+            <span class="text-gray-500">Total Paid:</span>
+            <span class="font-semibold">{balance.totalPaid || 0}</span>
           </p>
         </div>
       </div>
@@ -231,7 +228,7 @@
 <!-- dialog: logs -->
 <Drawer fullscreen bind:this={logDrawerEl} title="Logs">
   <pre
-    class="h-full p-4 overflow-scroll select-text bg-gray-50 text-xs">
+    class="h-full p-4 overflow-scroll select-text bg-gray-50 dark:bg-gray-900 text-xs">
     {miningLogs.join('\n') || 'Pending logs...'}
   </pre>
 </Drawer>
