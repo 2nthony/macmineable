@@ -60,4 +60,7 @@
   .hashrates-chart .c3-tooltip-container table.c3-tooltip tbody tr:first-child {
     display: none;
   }
+  .dark .hashrates-chart .c3-tooltip-container table.c3-tooltip tr {
+    color: #333;
+  }
 </style>

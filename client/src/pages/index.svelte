@@ -24,7 +24,7 @@
   <sl-button type="primary" class="w-full">Continue</sl-button>
 </RouterLink>
 
-<p class="text-xs text-gray-700">
+<p class="text-xs text-gray-700 dark:text-gray-200">
   <span class="font-semibold">IMPORTANT:</span>
   Mining, if not made correctly, could lead to permanent damage of your hardware
   components as it uses a lot of computation power and energy, that's why
