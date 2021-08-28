@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"net"
 	"net/http"
 	"os"
 	"os/exec"
@@ -18,8 +17,8 @@ import (
 var eventbus = EventBus.New()
 
 const (
-	httpHost = "127.0.0.1"
-	httpPort = "47261"
+	hostIP   = "127.0.0.1"
+	hostPort = "47261" // Fixed http port because client-side uses `localstorage`
 )
 
 func main() {
@@ -46,25 +45,19 @@ func runApp() {
 	w.SetTitle("macMineable")
 	w.SetSize(400, 600, webview.HintFixed)
 
-	httpListener := serveUI()
+	createServer()
 
-	w.Navigate(fmt.Sprintf("http://%s/", httpListener.Addr()))
+	w.Navigate(fmt.Sprintf("http://%s:%s", hostIP, hostPort))
 
 	w.Run()
 }
 
-func serveUI() net.Listener {
-	http.Handle("/", http.FileServer(http.Dir("dist")))
-	// Fixed http port because client-side uses `localstorage`
-	httpListener, err := net.Listen("tcp", fmt.Sprintf("%s:%s", httpHost, httpPort))
-	if err != nil {
-		fmt.Println(err)
-	}
-	go func() {
-		fmt.Println(http.Serve(httpListener, nil))
-	}()
+func createServer() {
+	registerRoutes()
 
-	return httpListener
+	go func() {
+		fmt.Println(http.ListenAndServe(fmt.Sprintf("%s:%s", hostIP, hostPort), nil))
+	}()
 }
 
 // client events
@@ -74,15 +67,13 @@ func registerIPCEvents(w webview.WebView) {
 
 	w.Bind("emitPageReady", func() {
 		fmt.Println("emitPageReady")
-		w.Dispatch(func() {
-			w.Eval(fmt.Sprintf(`
+		w.Eval(fmt.Sprintf(`
         onPageReady({
           cpuCores: %s
         })
         `,
-				fmt.Sprint(runtime.NumCPU()),
-			))
-		})
+			fmt.Sprint(runtime.NumCPU()),
+		))
 	})
 
 	type Form struct {
@@ -98,9 +89,7 @@ func registerIPCEvents(w webview.WebView) {
 		fmt.Printf("form: %v\n", form)
 
 		if miningProcess != nil {
-			w.Dispatch(func() {
-				w.Eval("onMiningStarted()")
-			})
+			w.Eval("onMiningStarted()")
 			return
 		}
 
@@ -108,23 +97,11 @@ func registerIPCEvents(w webview.WebView) {
 			fmt.Sprintf(`%s --no-color --url=rx.unmineable.com:3333 --algo=rx --pass=x --keepalive --user=%s:%s.macMineable#%s --cpu-max-threads-hint=%s`, minerPath, form.Symbol, form.Address, form.ReferralCode, fmt.Sprint(form.CPUUsage)),
 		)
 		if err != nil {
-			w.Dispatch(func() {
-				w.Eval(fmt.Sprintf(`onMiningStartedError("%s")`, err))
-			})
+			w.Eval(fmt.Sprintf(`onMiningStartedError("%s")`, err))
 			return
 		}
 
-		w.Dispatch(func() {
-			w.Eval("onMiningStarted()")
-		})
-
-		eventbus.Subscribe("cmd:log", func(line string) {
-			// https://github.com/webview/webview/issues/248
-			// prevent routine in low-perform machine, e.g. Macbook 12-inch with Intel M-5Y31 chip
-			w.Dispatch(func() {
-				w.Eval(fmt.Sprintf(`onMiningLog("%s")`, line))
-			})
-		})
+		w.Eval("onMiningStarted()")
 
 		miningProcess = process
 	})
@@ -133,9 +110,7 @@ func registerIPCEvents(w webview.WebView) {
 			// prefer kill the process
 			miningProcess.Process.Kill()
 			miningProcess = nil
-			w.Dispatch(func() {
-				w.Eval("onMiningStopped()")
-			})
+			w.Eval("onMiningStopped()")
 			/* err := miningProcess.Process.Signal(os.Interrupt)
 						if err != nil {
 							w.Eval(fmt.Sprintf("onMiningStoppedError(%s)", err))
