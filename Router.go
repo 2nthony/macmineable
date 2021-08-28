@@ -12,9 +12,9 @@ func registerRoutes() {
 	http.HandleFunc("/wsMiningLog", wsMiningLog)
 }
 
-var upgrader = websocket.Upgrader{}
-
 func wsMiningLog(w http.ResponseWriter, r *http.Request) {
+	var upgrader = websocket.Upgrader{}
+
 	ws, socketErr := upgrader.Upgrade(w, r, nil)
 	if socketErr != nil {
 		fmt.Printf("socketErr: %v\n", socketErr)
