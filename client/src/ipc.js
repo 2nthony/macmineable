@@ -39,6 +39,3 @@ window.onMiningStopped = () => {
 window.onMiningStoppedError = (err) => {
   ipc.invoke('onMiningStoppedError', err)
 }
-window.onMiningLog = (log) => {
-  ipc.invoke('onMiningLog', log)
-}
