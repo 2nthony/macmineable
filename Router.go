@@ -9,11 +9,11 @@ import (
 
 func registerRoutes() {
 	http.Handle("/", http.FileServer(http.Dir("dist")))
-	http.HandleFunc("/wsMiningLog", wsMiningLog)
+	http.HandleFunc("/mining-log", wsMiningLog)
 }
 
 func wsMiningLog(w http.ResponseWriter, r *http.Request) {
-	var upgrader = websocket.Upgrader{}
+	upgrader := websocket.Upgrader{}
 
 	ws, socketErr := upgrader.Upgrade(w, r, nil)
 	if socketErr != nil {
