@@ -34,7 +34,7 @@ func asyncLog(reader io.ReadCloser) error {
 					line = ts[0]
 					bucket = bucket[:0]
 				}
-				fmt.Printf("%s\n", line)
+				fmt.Printf("%v\n", line)
 				eventbus.Publish("cmd:log", line)
 			}
 		}

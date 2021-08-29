@@ -13,6 +13,7 @@ macMineable is the unMineable 3rd-party app that can let you mining cryptocurren
 ## Highlights
 
 - [x] Written in Go and Svelte
+- [x] Dark mode
 - [x] XMRig under the hood
 - [x] Fast and lite
 - [x] **unMineable UI flavoured**
@@ -20,7 +21,7 @@ macMineable is the unMineable 3rd-party app that can let you mining cryptocurren
 - [x] Tweak CPU usage for mining
 - [x] Check new release available
 - [x] Form memorize
-- [ ] Log reporter(Not perfect)
+- [x] Log reporter
 
 ## Download
 

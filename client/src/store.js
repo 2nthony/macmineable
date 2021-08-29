@@ -17,3 +17,5 @@ export const hashrates = writable([0, 0])
 
 // calculate step on `FormSettings.svelte`
 export const cpuCores = writable(100)
+
+export const miningLogs = writable([])

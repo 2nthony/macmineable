@@ -21,17 +21,33 @@
   store.isMining.subscribe((val) => (isMining = val))
   let preparing
   store.preparing.subscribe((val) => (preparing = val))
+  let miningLogs = []
+  store.miningLogs.subscribe((logs) => {
+    miningLogs = logs
+
+    const log = logs[logs.length - 1]
+    store.hashrates.update((val) => {
+      const hs = getHashrate(log)
+      if (hs) {
+        val.push(hs)
+      }
+
+      if (val.length > 6) {
+        val.shift()
+      }
+
+      return val
+    })
+  })
 
   let logDrawerEl
 
   let balance = {}
   let currentHashrate = null
-  let refreshingBalance = false
-  let miningLogs = []
-
-  store.hashrates.subscribe((val) => {
-    currentHashrate = [...val].reverse()[0]
+  store.hashrates.subscribe((hrs) => {
+    currentHashrate = hrs[hrs.length - 1]
   })
+  let refreshingBalance = false
 
   function handleGetBalance() {
     log('page mining:', 'refreshing balance.')
@@ -77,27 +93,6 @@
     })
     ipc.send('emitStopMining')
   }
-
-  ipc.listen('onMiningLog', (log) => {
-    miningLogs.push(log)
-    if (miningLogs.length >= 100) {
-      miningLogs.shift()
-    }
-    miningLogs = miningLogs
-
-    store.hashrates.update((val) => {
-      const hs = getHashrate(log)
-      if (hs) {
-        val.push(hs)
-      }
-
-      if (val.length > 6) {
-        val.shift()
-      }
-
-      return val
-    })
-  })
 
   onMount(() => {
     handleGetBalance()
@@ -228,7 +223,7 @@
 <!-- dialog: logs -->
 <Drawer fullscreen bind:this={logDrawerEl} title="Logs">
   <pre
-    class="h-full p-4 overflow-scroll select-text bg-gray-50 dark:bg-gray-900 text-xs">
+    class="h-full p-4 overflow-scroll select-text bg-gray-50 dark:bg-gray-900 text-xs rounded-md">
     {miningLogs.join('\n') || 'Pending logs...'}
   </pre>
 </Drawer>

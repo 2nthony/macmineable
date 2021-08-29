@@ -12,3 +12,5 @@ require (
 	github.com/klauspost/cpuid/v2 v2.0.9
 	golang.org/x/sys v0.0.0-20210616045830-e2b7044e8c71 // indirect
 )
+
+require github.com/gorilla/websocket v1.4.2 // indirect
