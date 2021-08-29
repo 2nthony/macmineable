@@ -1,4 +1,5 @@
 // Use listen just I am lazy
+import { onDestroy } from 'svelte'
 import { listen } from 'svelte/internal'
 
 export function prefersDark() {
@@ -9,7 +10,9 @@ export function prefersDark() {
     toggleDarkTheme()
   }
 
-  listen(media, 'change', toggleDarkTheme)
+  const unlisten = listen(media, 'change', toggleDarkTheme)
+
+  onDestroy(unlisten)
 }
 
 function toggleDarkTheme() {

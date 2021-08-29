@@ -18,11 +18,9 @@
   })
   ipc.send('emitPageReady')
 
-  onMount(() => {
-    checkUpdate()
-    prefersDark()
-    wsMiningLog()
-  })
+  checkUpdate()
+  prefersDark()
+  wsMiningLog()
 </script>
 
 <main class="p-6 h-screen">
