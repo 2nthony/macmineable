@@ -3,7 +3,6 @@
   import '@shoelace-style/shoelace/dist/themes/light.css'
   import '@shoelace-style/shoelace/dist/themes/dark.css'
 
-  import { onMount } from 'svelte'
   import { routes, Router } from './router'
   import { ipc } from './ipc'
   import { log } from './util/log'
@@ -18,11 +17,9 @@
   })
   ipc.send('emitPageReady')
 
-  onMount(() => {
-    checkUpdate()
-    prefersDark()
-    wsMiningLog()
-  })
+  checkUpdate()
+  prefersDark()
+  wsMiningLog()
 </script>
 
 <main class="p-6 h-screen">
