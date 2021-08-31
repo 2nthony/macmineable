@@ -41,7 +41,6 @@ func wsPing(ws *websocket.Conn) {
 		for t := range ticker.C {
 			fmt.Println("tick:", t)
 			pingCount += 1
-			fmt.Printf("pingCount: %v\n", pingCount)
 
 			if pingCount >= 30 {
 				ws.Close()
@@ -60,7 +59,6 @@ func wsPing(ws *websocket.Conn) {
 
 		// reset ping count
 		if m == "ping" {
-			fmt.Printf("message: %v\n", m)
 			pingCount = 0
 		}
 	}
