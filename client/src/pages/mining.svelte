@@ -1,7 +1,7 @@
 <script>
   import '@shoelace-style/shoelace/dist/components/button/button'
   import '@shoelace-style/shoelace/dist/components/tooltip/tooltip'
-  import { onMount, onDestory } from 'svelte'
+  import { onMount, onDestroy } from 'svelte'
   import * as store from '../store'
   import { getBalance } from '../server/unMineable'
   import IconRefresh from '../components/icons/Refresh.svelte'
@@ -97,7 +97,7 @@
   onMount(() => {
     handleGetBalance()
   })
-  onDestory(() => {
+  onDestroy(() => {
     store.miningLogs.set([])
   })
 </script>
