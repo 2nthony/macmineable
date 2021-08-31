@@ -23,8 +23,7 @@ export function wsMiningLog() {
     })
   })
 
-  let pingTicker = ticker(10, ping)
-  pingTicker.startTicker()
+  const pingTicker = ticker(10, ping)
 
   const unlisten = listen(
     document,

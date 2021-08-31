@@ -5,7 +5,11 @@ export function ticker(second, cb) {
     count = 0
   }
 
+  startTicker()
+
   function startTicker() {
+    if (ticker) return
+
     ticker = setInterval(() => {
       if (count >= second) {
         cb()
