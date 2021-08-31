@@ -2,7 +2,7 @@ import { onDestroy } from 'svelte'
 import { listen } from 'svelte/internal'
 import { useWebsocket } from '../use/websocket'
 import { miningLogs } from '../store'
-import { createCounter } from '../util/counter'
+import { ticker } from '../util/ticker'
 
 export function wsMiningLog() {
   const {
@@ -23,20 +23,25 @@ export function wsMiningLog() {
     })
   })
 
-  // TODO this may be reason of unresponsive
-  createCounter(10, ping)
+  let pingTicker = ticker(10, ping)
+  pingTicker.startTicker()
 
   const unlisten = listen(
     document,
     'visibilitychange',
     () => {
-      const visible = document.visibilityState === 'visible'
-      if (visible) {
+      if (document.visibilityState === 'visible') {
         reconnect()
+        pingTicker.startTicker()
+      } else {
+        pingTicker.stopTicker()
       }
     },
     false,
   )
 
-  onDestroy(unlisten)
+  onDestroy(() => {
+    unlisten()
+    pingTicker.stopTicker()
+  })
 }
