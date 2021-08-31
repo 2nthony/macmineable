@@ -23,6 +23,8 @@ export function ticker(second, cb) {
   return {
     resetCount,
     startTicker,
-    stopTicker: () => clearInterval(ticker),
+    stopTicker: () => {
+      ticker = clearInterval(ticker)
+    },
   }
 }
