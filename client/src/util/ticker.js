@@ -24,6 +24,7 @@ export function ticker(second, cb) {
     resetCount,
     startTicker,
     stopTicker: () => {
+      if (!ticker) return
       ticker = clearInterval(ticker)
     },
   }
