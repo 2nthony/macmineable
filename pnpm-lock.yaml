@@ -3,6 +3,7 @@ lockfileVersion: 5.3
 specifiers:
   '@shoelace-style/shoelace': ^2.0.0-beta.48
   '@sveltejs/vite-plugin-svelte': ^1.0.0-next.19
+  '@vitejs/plugin-legacy': ^1.5.2
   autoprefixer: ^10.3.2
   ava: ^3.15.0
   c3: ^0.7.20
@@ -27,6 +28,7 @@ dependencies:
 
 devDependencies:
   '@sveltejs/vite-plugin-svelte': 1.0.0-next.19_svelte@3.42.3+vite@2.5.1
+  '@vitejs/plugin-legacy': 1.5.2_vite@2.5.1
   autoprefixer: 10.3.2_postcss@8.3.6
   ava: 3.15.0
   esm: 3.2.25
@@ -57,6 +59,11 @@ packages:
       '@babel/helper-validator-identifier': 7.14.9
       chalk: 2.4.2
       js-tokens: 4.0.0
+    dev: true
+
+  /@babel/standalone/7.15.5:
+    resolution: {integrity: sha512-rho2fzDGLrdYVbl0S71I8z6AREWnVvADzv7Gb4TLKhqpE6cJAvno0ALMuF253+wqhN8futx4ELWQpBYMxi4jmA==}
+    engines: {node: '>=6.9.0'}
     dev: true
 
   /@concordance/react/2.0.0:
@@ -176,6 +183,20 @@ packages:
   /@types/trusted-types/1.0.6:
     resolution: {integrity: sha512-230RC8sFeHoT6sSUlRO6a8cAnclO06eeiq1QDfiv2FGCLWFvvERWgwIQD4FWqD9A69BN7Lzee4OXwoMVnnsWDw==}
     dev: false
+
+  /@vitejs/plugin-legacy/1.5.2_vite@2.5.1:
+    resolution: {integrity: sha512-b1CaWY/wi7gQZnZaxH+ujPTPb91bEPgnnk7l0WIwxoQtW5UC5MQywRcAbFX+Ise62exXctOMBtsnXKJw2KajXw==}
+    engines: {node: '>=12.0.0'}
+    peerDependencies:
+      vite: ^2.0.0
+    dependencies:
+      '@babel/standalone': 7.15.5
+      core-js: 3.17.2
+      magic-string: 0.25.7
+      regenerator-runtime: 0.13.9
+      systemjs: 6.10.3
+      vite: 2.5.1
+    dev: true
 
   /acorn-node/1.8.2:
     resolution: {integrity: sha512-8mt+fslDufLYntIoPAaIMUe/lrbrehIiwmR3t2k9LljIzoigEPF27eLk2hy8zSGzmR/ogr7zbRKINMo1u0yh5A==}
@@ -687,6 +708,11 @@ packages:
   /convert-to-spaces/1.0.2:
     resolution: {integrity: sha1-fj5Iu+bZl7FBfdyihoIEtNPYVxU=}
     engines: {node: '>= 4'}
+    dev: true
+
+  /core-js/3.17.2:
+    resolution: {integrity: sha512-XkbXqhcXeMHPRk2ItS+zQYliAMilea2euoMsnpRRdDad6b2VY6CQQcwz1K8AnWesfw4p165RzY0bTnr3UrbYiA==}
+    requiresBuild: true
     dev: true
 
   /cosmiconfig/7.0.1:
@@ -2142,6 +2168,10 @@ packages:
       postcss-value-parser: 3.3.1
     dev: true
 
+  /regenerator-runtime/0.13.9:
+    resolution: {integrity: sha512-p3VT+cOEgxFsRRA9X4lkI1E+k2/CtnKtU4gcxyaCUreilL/vqI6CdZ3wxVUx3UOUg+gnUOQQcRI7BmSI656MYA==}
+    dev: true
+
   /regexparam/2.0.0:
     resolution: {integrity: sha512-gJKwd2MVPWHAIFLsaYDZfyKzHNS4o7E/v8YmNf44vmeV2e4YfVoDToTOKTvE7ab68cRJ++kLuEXJBaEeJVt5ow==}
     engines: {node: '>=8'}
@@ -2502,6 +2532,10 @@ packages:
   /svelte/3.42.3:
     resolution: {integrity: sha512-pbdtdNZEx2GBqSM6XEgPoHbwtvWBwFLt/1bRmzsyXZO+i424wFnPe7O5B3GOJDPFSxPRztumAW3mL5LPzecWUg==}
     engines: {node: '>= 8'}
+    dev: true
+
+  /systemjs/6.10.3:
+    resolution: {integrity: sha512-mXwfLJdaADqWg1J5+Z0bGQEdcXSe+ePPTfzffMB29aVls5cXveRl0vneSV/19t3SfuUBsAraLP8W/g5u9cmYXA==}
     dev: true
 
   /tailwindcss/2.2.7_8b238584a104f535cc123d61e89214a6:
