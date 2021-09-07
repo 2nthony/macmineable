@@ -17,7 +17,6 @@
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^1.0.0-next.19",
-    "@vitejs/plugin-legacy": "^1.5.2",
     "autoprefixer": "^10.3.2",
     "ava": "^3.15.0",
     "esm": "^3.2.25",
