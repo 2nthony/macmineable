@@ -4,24 +4,26 @@
 
 > I spend my rest time working on this. If my work helped you, please considering [buy me a coffee](https://2nthony.notion.site/Buy-2nthony-Coffee-d67a508cd58e4896bfb50c7112f93f51)🙏.
 
-![macmineable](https://cdn.jsdelivr.net/gh/evillt/github-itself-image-hosting-service@main/uPic/macMineable-open-graph-imagefXxVYP.png)
-
 ## Introduction
 
 macMineable is the unMineable 3rd-party app that can let you mining cryptocurrency on macOS with ease.
 
 ## Highlights
 
+- [x] **unMineable UI flavoured**
 - [x] Written in Go and Svelte
 - [x] Dark mode
 - [x] XMRig under the hood
 - [x] Fast and lite
-- [x] **unMineable UI flavoured**
 - [x] All unMineable coins are supported
 - [x] Tweak CPU usage for mining
 - [x] Check new release available
 - [x] Form memorize
 - [x] Log reporter
+
+## macOS version requires
+
+11.0 or later.
 
 ## Download
 
