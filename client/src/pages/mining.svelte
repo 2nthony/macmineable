@@ -180,10 +180,10 @@
 
   <div>
     <div class="mb-4">
-      <div class="text-gray-500">Current Hashrate</div>
+      <div class="text-gray-500">Hashrate</div>
       <div class="text-4xl flex items-center">
         {#if isMining && !currentHashrate}
-          <span class="text-gray-600">Starting...</span>
+          <span class="text-gray-600">Running...</span>
         {:else}
           <span>{currentHashrate || 0} h</span>
         {/if}
