@@ -71,6 +71,6 @@
     type="primary"
     class="ml-4"
     on:click={handleSave}
-    disabled={saving || !isChanged}>Save & Restart</sl-button
+    disabled={saving || !isChanged}>Save{isMining ? ' & Restart' : ''}</sl-button
   >
 </Drawer>
