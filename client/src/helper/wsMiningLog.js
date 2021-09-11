@@ -1,8 +1,8 @@
 import { onDestroy } from 'svelte'
-import { listen } from 'svelte/internal'
 import { useWebsocket } from '../use/websocket'
 import { miningLogs } from '../store'
 import { ticker } from '../util/ticker'
+import { useEventListener } from '@svelte-use/core'
 
 export function wsMiningLog() {
   const {
@@ -24,23 +24,16 @@ export function wsMiningLog() {
   })
 
   const pingTicker = ticker(10, ping)
-
-  const unlisten = listen(
-    document,
-    'visibilitychange',
-    () => {
-      if (document.visibilityState === 'visible') {
-        reconnect()
-        pingTicker.startTicker()
-      } else {
-        pingTicker.stopTicker()
-      }
-    },
-    false,
-  )
+  useEventListener(document, 'visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+      reconnect()
+      pingTicker.startTicker()
+    } else {
+      pingTicker.stopTicker()
+    }
+  })
 
   onDestroy(() => {
-    unlisten()
     pingTicker.stopTicker()
   })
 }

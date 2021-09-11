@@ -5,7 +5,7 @@ import { compareVersion } from '../util/compareVersion'
 import pkg from '../../../package.json'
 import { ticker } from '../util/ticker'
 import { onDestroy } from 'svelte'
-import { listen } from 'svelte/internal'
+import { useEventListener } from '@svelte-use/core'
 
 const appVersion = pkg.version
 
@@ -42,22 +42,16 @@ export function checkUpdate() {
         })
     }
 
-    const unlisten = listen(
-      document,
-      'visibilitychange',
-      () => {
-        if (toast) return
-        if (document.visibilityState === 'visible') {
-          checkUpdateTicker.startTicker()
-        } else {
-          checkUpdateTicker.stopTicker()
-        }
-      },
-      false,
-    )
+    useEventListener(document, 'visibilitychange', () => {
+      if (toast) return
+      if (document.visibilityState === 'visible') {
+        checkUpdateTicker.startTicker()
+      } else {
+        checkUpdateTicker.stopTicker()
+      }
+    })
 
     onDestroy(() => {
-      unlisten()
       checkUpdateTicker.stopTicker()
     })
   }
