@@ -5,7 +5,8 @@
     "dev": "vite",
     "build": "vite build",
     "test": "ava --verbose",
-    "push": "git push && git push --tags"
+    "push": "git push && git push --tags",
+    "release": "node scripts/release.js"
   },
   "dependencies": {
     "@shoelace-style/shoelace": "^2.0.0-beta.48",
@@ -20,7 +21,9 @@
     "@sveltejs/vite-plugin-svelte": "^1.0.0-next.19",
     "autoprefixer": "^10.3.2",
     "ava": "^3.15.0",
+    "bumpp": "^7.1.1",
     "esm": "^3.2.25",
+    "fs-extra": "^10.0.0",
     "postcss": "^8.3.6",
     "svelte": "^3.42.3",
     "svelte-preprocess": "^4.8.0",
