@@ -226,7 +226,7 @@
 <!-- dialog: logs -->
 <Drawer fullscreen bind:this={logDrawerEl} title="Logs">
   <pre
-    class="h-full p-4 overflow-scroll select-text bg-gray-50 dark:bg-gray-900 text-xs rounded-md">
+    class="h-full p-4 overflow-auto select-text bg-gray-50 dark:bg-gray-900 text-xs rounded-md">
     {miningLogs.join('\n') || 'Pending logs...'}
   </pre>
 </Drawer>
