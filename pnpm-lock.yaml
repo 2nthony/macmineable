@@ -2,6 +2,7 @@ lockfileVersion: 5.3
 
 specifiers:
   '@shoelace-style/shoelace': ^2.0.0-beta.48
+  '@svelte-use/core': ^0.0.16
   '@sveltejs/vite-plugin-svelte': ^1.0.0-next.19
   autoprefixer: ^10.3.2
   ava: ^3.15.0
@@ -19,6 +20,7 @@ specifiers:
 
 dependencies:
   '@shoelace-style/shoelace': 2.0.0-beta.48
+  '@svelte-use/core': 0.0.16
   c3: 0.7.20
   lodash.isequal: 4.5.0
   svelte-spa-router: 3.2.0
@@ -120,6 +122,16 @@ packages:
     resolution: {integrity: sha512-9NET910DNaIPngYnLLPeg+Ogzqsi9uM4mSboU5y6p8S5DzMTVEsJZrawi+BoDNUVBa2DhJqQYUFvMDfgU062LQ==}
     engines: {node: '>=6'}
     dev: true
+
+  /@svelte-use/core/0.0.16:
+    resolution: {integrity: sha512-J5FtUdMWum85nP+S4KraYvmCDi36Edq/iuu/xBqHfyef+A7waHCrKBndqeDkZuc8cWc6294ufeglAoebtzdaQg==}
+    dependencies:
+      '@svelte-use/shared': 0.0.16
+    dev: false
+
+  /@svelte-use/shared/0.0.16:
+    resolution: {integrity: sha512-MpP53UwpO2tq3ygeUYlWYr0tWCwD7olpdNGoaF4lFVm1J4LHamBG2kzAoL91WwI1QYqeK7N13NBiwBgKeq+qQQ==}
+    dev: false
 
   /@sveltejs/vite-plugin-svelte/1.0.0-next.19_svelte@3.42.3+vite@2.5.1:
     resolution: {integrity: sha512-q9hHkMzodScwDq64pNaWhekpj97vWg3wO9T0rqd8bC2EsrBQs2uD1qMJvDqlNd63AbO2uSJMGo+TQ0Xt2xgyYg==}
