@@ -1,5 +1,6 @@
 <script>
   import './assets/index.css'
+  import './assets/vars.css'
   import '@shoelace-style/shoelace/dist/themes/light.css'
   import '@shoelace-style/shoelace/dist/themes/dark.css'
 
@@ -22,6 +23,6 @@
   wsMiningLog()
 </script>
 
-<main class="p-6 h-screen">
+<main class="h-screen p-6">
   <Router {routes} />
 </main>
