@@ -5,12 +5,12 @@ import { compareVersion } from '../util/compareVersion'
 import pkg from '../../../package.json'
 import { ticker } from '../util/ticker'
 import { onDestroy } from 'svelte'
-import { useEventListener } from '@svelte-use/core'
+import { now, useEventListener } from '@svelte-use/core'
 
 const appVersion = pkg.version
 
 const url =
-  'https://api.github.com/repos/evillt/macmineable-release/releases?per_page=1'
+  `https://api.github.com/repos/evillt/macmineable-release/releases?_=${now()}&per_page=1`
 let toast
 
 export function checkUpdate() {
