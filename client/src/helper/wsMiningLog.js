@@ -1,10 +1,11 @@
-import { onDestroy } from 'svelte'
 import { useWebsocket } from '../use/websocket'
 import { miningLogs } from '../store'
 import { ticker } from '../util/ticker'
-import { useEventListener } from '@svelte-use/core'
+import { tryOnDestroy, useEventListener } from '@svelte-use/core'
 
 export function wsMiningLog() {
+  if (!import.meta.env.PROD) return
+
   const {
     message: onMiningLog,
     ping,
@@ -33,7 +34,7 @@ export function wsMiningLog() {
     }
   })
 
-  onDestroy(() => {
+  tryOnDestroy(() => {
     pingTicker.stopTicker()
   })
 }

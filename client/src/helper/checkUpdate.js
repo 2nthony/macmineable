@@ -9,50 +9,48 @@ import { now, useEventListener } from '@svelte-use/core'
 
 const appVersion = pkg.version
 
-const url =
-  `https://api.github.com/repos/evillt/macmineable-release/releases?_=${now()}&per_page=1`
+const url = `https://api.github.com/repos/evillt/macmineable-release/releases?_=${now()}&per_page=1`
 let toast
 
 export function checkUpdate() {
-  if (import.meta.env.PROD) {
-    check()
+  if (!import.meta.env.PROD) return
+  check()
 
-    const checkUpdateTicker = ticker(1800, check)
+  const checkUpdateTicker = ticker(1800, check)
 
-    function check() {
-      fetch(url)
-        .then((res) => res.json())
-        .then(([release]) => {
-          const version = release.name.startsWith('v')
-            ? release.name.slice(1)
-            : release.name
+  function check() {
+    fetch(url)
+      .then((res) => res.json())
+      .then(([release]) => {
+        const version = release.name.startsWith('v')
+          ? release.name.slice(1)
+          : release.name
 
-          if (compareVersion(version, appVersion)) {
-            checkUpdateTicker.stopTicker()
-            toast = createToast('New release avaliable!', {
-              action: {
-                text: 'Download',
-                callback: () => {
-                  ipc.send('emitOpenURL', release.html_url)
-                },
+        if (compareVersion(version, appVersion)) {
+          checkUpdateTicker.stopTicker()
+          toast = createToast('New release avaliable!', {
+            action: {
+              text: 'Download',
+              callback: () => {
+                ipc.send('emitOpenURL', release.html_url)
               },
-              cancel: 'Ignore',
-            })
-          }
-        })
-    }
-
-    useEventListener(document, 'visibilitychange', () => {
-      if (toast) return
-      if (document.visibilityState === 'visible') {
-        checkUpdateTicker.startTicker()
-      } else {
-        checkUpdateTicker.stopTicker()
-      }
-    })
-
-    onDestroy(() => {
-      checkUpdateTicker.stopTicker()
-    })
+            },
+            cancel: 'Ignore',
+          })
+        }
+      })
   }
+
+  useEventListener(document, 'visibilitychange', () => {
+    if (toast) return
+    if (document.visibilityState === 'visible') {
+      checkUpdateTicker.startTicker()
+    } else {
+      checkUpdateTicker.stopTicker()
+    }
+  })
+
+  onDestroy(() => {
+    checkUpdateTicker.stopTicker()
+  })
 }
