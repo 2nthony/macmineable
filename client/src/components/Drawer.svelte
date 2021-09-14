@@ -1,5 +1,5 @@
 <script>
-  import { onMount } from 'svelte'
+  import { tryOnMount } from '@svelte-use/core'
   import { listen } from 'svelte/internal'
   import '@shoelace-style/shoelace/dist/components/drawer/drawer'
   import '@shoelace-style/shoelace/dist/components/button/button'
@@ -22,7 +22,7 @@
     drawerEl.hide()
   }
 
-  onMount(() => {
+  tryOnMount(() => {
     listen(closeEl, 'click', () => {
       drawerEl.hide()
     })

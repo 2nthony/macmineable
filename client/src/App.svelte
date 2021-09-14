@@ -7,14 +7,14 @@
   import { routes, Router } from './router'
   import { ipc } from './ipc'
   import { log } from './util/log'
-  import * as store from './store'
+  import { cpuCores } from './store'
   import { checkUpdate } from './helper/checkUpdate'
   import { prefersDark } from './helper/prefersDark'
   import { wsMiningLog } from './helper/wsMiningLog'
 
   ipc.listen('onPageReady', (data) => {
     log('onPageReady', data)
-    store.cpuCores.set(data.cpuCores)
+    $cpuCores = data.cpuCores
   })
   ipc.send('emitPageReady')
 

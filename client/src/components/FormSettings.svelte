@@ -1,24 +1,19 @@
 <script>
-  import { onMount } from 'svelte'
+  import { tryOnMount } from '@svelte-use/core'
   import { listen } from 'svelte/internal'
   import '@shoelace-style/shoelace/dist/components/form/form'
   import '@shoelace-style/shoelace/dist/components/range/range'
 
-  import * as store from '../store'
+  import { form, cpuCores } from '../store'
   import * as formUtils from '../util/form'
   import { useDispatch } from '../use/dispatch'
 
   const { dispatch } = useDispatch()
 
-  let form
-  store.form.subscribe((val) => (form = val))
-  let cpuCores
-  store.cpuCores.subscribe((val) => (cpuCores = val))
-
-  $: step = 100 / cpuCores
+  $: step = 100 / $cpuCores
 
   let tweakForm = {
-    cpuUsage: form.cpuUsage,
+    cpuUsage: $form.cpuUsage,
   }
 
   let formEl
@@ -31,11 +26,11 @@
     tweakForm = { ...tweakForm, ...data }
   }
 
-  onMount(() => {
+  tryOnMount(() => {
     formEl.childNodes.forEach((el) => {
       if (el.name) {
         listen(el, 'sl-change', (event) => {
-          dispatch('change', { ...form, [el.name]: event.target.value })
+          dispatch('change', { ...$form, [el.name]: event.target.value })
           tweakForm[el.name] = event.target.value
         })
       }

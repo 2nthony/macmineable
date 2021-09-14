@@ -1,8 +1,8 @@
 <script>
   import '@shoelace-style/shoelace/dist/components/button/button'
   import '@shoelace-style/shoelace/dist/components/tooltip/tooltip'
-  import { onMount, onDestroy } from 'svelte'
-  import * as store from '../store'
+  import { tryOnMount, tryOnDestroy } from '@svelte-use/core'
+  import { form, isMining, preparing, miningLogs, hashrates } from '../store'
   import { getBalance } from '../server/unMineable'
   import IconRefresh from '../components/icons/Refresh.svelte'
   import { ipc } from '../ipc'
@@ -15,18 +15,13 @@
   import { getHashrate } from '../util/mining'
   import Link from '../components/Link.svelte'
 
-  let form
-  store.form.subscribe((data) => (form = data))
-  let isMining
-  store.isMining.subscribe((val) => (isMining = val))
-  let preparing
-  store.preparing.subscribe((val) => (preparing = val))
-  let miningLogs = []
-  store.miningLogs.subscribe((logs) => {
-    miningLogs = logs
+  let dialogLogsData = []
+
+  miningLogs.subscribe((logs) => {
+    dialogLogsData = logs
 
     const log = logs[logs.length - 1]
-    store.hashrates.update((val) => {
+    hashrates.update((val) => {
       const hs = getHashrate(log)
       if (hs) {
         val.push(hs)
@@ -43,17 +38,14 @@
   let logDrawerEl
 
   let balance = {}
-  let currentHashrate = null
-  store.hashrates.subscribe((hrs) => {
-    currentHashrate = hrs[hrs.length - 1]
-  })
+  $: currentHashrate = $hashrates[$hashrates.length - 1]
   let refreshingBalance = false
 
   function handleGetBalance() {
     log('page mining:', 'refreshing balance.')
 
     refreshingBalance = true
-    getBalance(form.symbol, form.address)
+    getBalance($form.symbol, $form.address)
       .then((data) => (balance = data))
       .finally(() => {
         refreshingBalance = false
@@ -63,7 +55,7 @@
   async function handleBackToSelectCoin() {
     log('page mining:', 'back to select coin')
 
-    if (isMining) {
+    if ($isMining) {
       ipc.listen('onMiningStopped', () => {
         router.pop()
       })
@@ -77,28 +69,28 @@
     log('page mining:', 'start')
 
     ipc.listen('onMiningStarted', () => {
-      store.isMining.set(true)
+      $isMining = true
     })
-    ipc.send('emitStartMining', JSON.stringify(form))
+    ipc.send('emitStartMining', JSON.stringify($form))
   }
 
   function handleStop() {
     log('page mining:', 'stop')
 
     ipc.listen('onMiningStopped', () => {
-      store.isMining.set(false)
+      $isMining = false
       if (currentHashrate) {
-        store.hashrates.update((val) => [...val, 0])
+        $hashrates = [...$hashrates, 0]
       }
     })
     ipc.send('emitStopMining')
   }
 
-  onMount(() => {
+  tryOnMount(() => {
     handleGetBalance()
   })
-  onDestroy(() => {
-    store.miningLogs.set([])
+  tryOnDestroy(() => {
+    $miningLogs.length = 0
   })
 </script>
 
@@ -120,7 +112,7 @@
       <div class="mt-6">
         <h5 class="mb-1">Address</h5>
         <div class="flex items-center justify-between">
-          <sl-tooltip placement="top" content={form.address}>
+          <sl-tooltip placement="top" content={$form.address}>
             <p
               class="
                 text-gray-500 text-xs
@@ -132,7 +124,7 @@
                 mr-8
               "
             >
-              {form.address}
+              {$form.address}
             </p>
           </sl-tooltip>
 
@@ -140,7 +132,7 @@
             size="small"
             on:click={ipc.send(
               'emitOpenURL',
-              `https://unmineable.com/coins/${form.symbol}/address/${form.address}`,
+              `https://unmineable.com/coins/${$form.symbol}/address/${$form.address}`,
             )}>Stats</sl-button
           >
         </div>
@@ -160,7 +152,7 @@
           <p class="text-4xl m-0 mr-2 font-semibold">
             {balance.pendingBalance || 0}
           </p>
-          <span>{form.symbol || ''}</span>
+          <span>{$form.symbol || ''}</span>
         </div>
         <div class="flex flex-col">
           <p class="m-0 text-sm">
@@ -182,7 +174,7 @@
     <div class="mb-4">
       <div class="text-gray-500">Hashrate</div>
       <div class="text-4xl flex items-center">
-        {#if isMining && !currentHashrate}
+        {#if $isMining && !currentHashrate}
           <span class="text-gray-600">Running...</span>
         {:else}
           <span>{currentHashrate || 0} h</span>
@@ -209,12 +201,12 @@
             on:click={logDrawerEl.show}
           />
         </sl-tooltip>
-        {#if !isMining}
-          <sl-button type="primary" disabled={preparing} on:click={handleStart}
+        {#if !$isMining}
+          <sl-button type="primary" disabled={$preparing} on:click={handleStart}
             >Start</sl-button
           >
         {:else}
-          <sl-button type="danger" disabled={preparing} on:click={handleStop}
+          <sl-button type="danger" disabled={$preparing} on:click={handleStop}
             >Stop</sl-button
           >
         {/if}
@@ -227,6 +219,6 @@
 <Drawer fullscreen bind:this={logDrawerEl} title="Logs">
   <pre
     class="h-full p-4 overflow-auto select-text bg-gray-50 dark:bg-gray-900 text-xs rounded-md">
-    {miningLogs.join('\n') || 'Pending logs...'}
+    {dialogLogsData.join('\n') || 'Pending logs...'}
   </pre>
 </Drawer>

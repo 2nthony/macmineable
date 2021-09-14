@@ -5,13 +5,8 @@
   import Drawer from './Drawer.svelte'
   import FormSettings from './FormSettings.svelte'
   import { parseFormData } from '../util/form'
-  import * as store from '../store'
+  import { form, isMining } from '../store'
   import { ipc } from '../ipc'
-
-  let form
-  store.form.subscribe((val) => (form = val))
-  let isMining
-  store.isMining.subscribe((val) => (isMining = val))
 
   let drawerComp
   let formSettingsComp
@@ -29,15 +24,16 @@
       v.cpuUsage = Number(v.cpuUsage)
       return v
     })
-    store.form.update((val) => ({ ...val, ...data }))
 
-    if (isMining) {
+    $form = { ...$form, ...data }
+
+    if ($isMining) {
       ipc.listen('onMiningStopped', () => {
         ipc.listen('onMiningStarted', () => {
           saving = false
           drawerComp.hide()
         })
-        ipc.send('emitStartMining', JSON.stringify(form))
+        ipc.send('emitStartMining', JSON.stringify($form))
       })
       saving = true
       ipc.send('emitStopMining')
@@ -47,13 +43,13 @@
   }
 
   function resetFormData() {
-    formSettingsComp.setFormData(form)
+    formSettingsComp.setFormData($form)
     isChanged = false
   }
 
   function onFormChange(event) {
     const data = event.detail
-    isChanged = !_isEqual(form, data)
+    isChanged = !_isEqual($form, data)
   }
 </script>
 
@@ -71,6 +67,6 @@
     type="primary"
     class="ml-4"
     on:click={handleSave}
-    disabled={saving || !isChanged}>Save{isMining ? ' & Restart' : ''}</sl-button
+    disabled={saving || !isChanged}>Save{$isMining ? ' & Restart' : ''}</sl-button
   >
 </Drawer>

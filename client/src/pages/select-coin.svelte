@@ -1,5 +1,5 @@
 <script>
-  import { onMount } from 'svelte'
+  import { tryOnMount } from '@svelte-use/core'
   import { listen } from 'svelte/internal'
   import * as router from 'svelte-spa-router'
   import '@shoelace-style/shoelace/dist/components/form/form'
@@ -16,16 +16,11 @@
     getReferralCode,
     validateAddress,
   } from '../server/unMineable'
-  import * as store from '../store'
+  import { form, preparing, isMining } from '../store'
   import { parseFormData, setFormData } from '../util/form'
   import { getStorage, setStorage } from '../util/storage'
   import TopButtons from '../components/TopButtons.svelte'
   import { log } from '../util/log'
-
-  let form
-  store.form.subscribe((val) => (form = val))
-  let preparing
-  store.preparing.subscribe((bool) => (preparing = bool))
 
   let formEl
   let selectCoinEl
@@ -35,7 +30,7 @@
   function onStart(event) {
     log('page select-coin:', 'start')
 
-    store.preparing.set(true)
+    $preparing = true
 
     log('page select-coin:', 'validating address')
 
@@ -44,17 +39,17 @@
     validateAddress(data.symbol, data.address)
       .then((isExist) => {
         if (isExist) {
-          store.form.update((value) => ({ ...value, ...data }))
+          $form = { ...$form, ...data }
 
-          setStorage('form', form)
-          setStorage(form.symbol, form.address)
+          setStorage('form', $form)
+          setStorage($form.symbol, $form.address)
 
           ipc.listen('onMiningStarted', () => {
-            store.preparing.set(false)
-            store.isMining.set(true)
+            $preparing = false
+            $isMining = true
             router.push('/mining')
           })
-          ipc.send('emitStartMining', JSON.stringify(form))
+          ipc.send('emitStartMining', JSON.stringify($form))
         } else {
           createToast(
             `Your address does't exist on unMineable, please register it first.`,
@@ -65,7 +60,7 @@
                 callback: (toast) => {
                   ipc.send(
                     'emitOpenURL',
-                    `https://unmineable.com/coins/${form.symbol}/address`,
+                    `https://unmineable.com/coins/${$form.symbol}/address`,
                   )
 
                   toast.destory()
@@ -77,14 +72,14 @@
         }
       })
       .catch((error) => {
-        store.preparing.set(false)
+        $preparing = false
         createToast(error, {
           type: 'error',
           cancel: 'Cancel',
         })
       })
       .finally(() => {
-        store.preparing.set(false)
+        $preparing = false
       })
   }
 
@@ -94,7 +89,7 @@
     inputReferralCodeEl.value = getReferralCode(unMineableCoins, selectedSymbol)
   }
 
-  onMount(() => {
+  tryOnMount(() => {
     listen(formEl, 'sl-submit', onStart)
     listen(selectCoinEl, 'sl-change', onSelectCoinChange)
 
@@ -136,7 +131,7 @@
     label="Referral Code(Optional)"
     bind:this={inputReferralCodeEl}
   >
-    <p slot="help-text" class="text-xs mt-2 text-gray-400">
+    <p slot="help-text" class="mt-2 text-xs text-gray-400">
       You can lower your fees to 0.75% with this valid referral code! Or you use
       your own one.
     </p>
@@ -144,9 +139,9 @@
 
   <sl-button
     type="primary"
-    class="mt-4 w-full"
+    class="w-full mt-4"
     submit
-    loading={preparing}
-    disabled={preparing}>Start</sl-button
+    loading={$preparing}
+    disabled={$preparing}>Start</sl-button
   >
 </sl-form>
