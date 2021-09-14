@@ -11,8 +11,8 @@
   },
   "dependencies": {
     "@shoelace-style/shoelace": "^2.0.0-beta.51",
-    "@svelte-use/core": "^0.1.1",
-    "@svelte-use/store": "^0.1.1",
+    "@svelte-use/core": "^0.3.0",
+    "@svelte-use/store": "^0.3.0",
     "c3": "^0.7.20",
     "lodash.isequal": "^4.5.0",
     "svelte-spa-router": "^3.2.0",
@@ -20,7 +20,7 @@
     "vercel-toast": "^1.5.3"
   },
   "devDependencies": {
-    "@sveltejs/vite-plugin-svelte": "^1.0.0-next.23",
+    "@sveltejs/vite-plugin-svelte": "^1.0.0-next.24",
     "autoprefixer": "^10.3.4",
     "ava": "^3.15.0",
     "bumpp": "^7.1.1",
