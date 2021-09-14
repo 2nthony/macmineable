@@ -8,15 +8,17 @@ const presetCoins = [
   fastCoin('SHIBA', 'SHIB', 'c310-m2st'),
 ]
 
-export const unMineableCoins = presetCoins.concat(
-  apiv4coin.data
-    .filter((unCoin) => {
-      return presetCoins.findIndex((coin) => coin[1] === unCoin.symbol) < 0
-    })
-    .map((supplyCoin) => {
-      return fastCoin(supplyCoin.name, supplyCoin.symbol, referralCode)
-    }),
-)
+export const unMineableCoins = presetCoins
+  .concat(
+    apiv4coin.data
+      .filter((unCoin) => {
+        return presetCoins.findIndex((coin) => coin[1] === unCoin.symbol) < 0
+      })
+      .map((supplyCoin) => {
+        return fastCoin(supplyCoin.name, supplyCoin.symbol, referralCode)
+      }),
+  )
+  .sort()
 
 export function getReferralCode(coins, symbol) {
   return coins.find((coin) => coin[1] === symbol)[2]
