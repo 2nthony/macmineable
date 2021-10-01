@@ -10,9 +10,9 @@
     "release": "node scripts/release.js && git push --follow-tags"
   },
   "dependencies": {
-    "@shoelace-style/shoelace": "^2.0.0-beta.51",
-    "@svelte-use/core": "^0.3.0",
-    "@svelte-use/store": "^0.3.0",
+    "@shoelace-style/shoelace": "^2.0.0-beta.52",
+    "@svelte-use/core": "^0.8.1",
+    "@svelte-use/store": "^0.8.1",
     "c3": "^0.7.20",
     "lodash.isequal": "^4.5.0",
     "svelte-spa-router": "^3.2.0",
@@ -20,17 +20,17 @@
     "vercel-toast": "^1.5.3"
   },
   "devDependencies": {
-    "@sveltejs/vite-plugin-svelte": "^1.0.0-next.24",
-    "autoprefixer": "^10.3.4",
+    "@sveltejs/vite-plugin-svelte": "^1.0.0-next.26",
+    "autoprefixer": "^10.3.6",
     "ava": "^3.15.0",
     "bumpp": "^7.1.1",
     "esm": "^3.2.25",
     "fs-extra": "^10.0.0",
-    "postcss": "^8.3.6",
-    "svelte": "^3.42.5",
-    "svelte-preprocess": "^4.9.4",
-    "tailwindcss": "^2.2.15",
-    "vite": "^2.5.7"
+    "postcss": "^8.3.8",
+    "svelte": "^3.43.1",
+    "svelte-preprocess": "^4.9.7",
+    "tailwindcss": "^2.2.16",
+    "vite": "^2.6.2"
   },
   "ava": {
     "require": [
