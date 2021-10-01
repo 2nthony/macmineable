@@ -9,7 +9,6 @@
   import { log } from './util/log'
   import { cpuCores } from './store'
   import { checkUpdate } from './helper/checkUpdate'
-  import { prefersDark } from './helper/prefersDark'
   import { wsMiningLog } from './helper/wsMiningLog'
 
   ipc.listen('onPageReady', (data) => {
@@ -19,7 +18,6 @@
   ipc.send('emitPageReady')
 
   checkUpdate()
-  prefersDark()
   wsMiningLog()
 </script>
 
