@@ -2,6 +2,7 @@
   import '@shoelace-style/shoelace/dist/components/button/button'
   import Link from '../components/Link.svelte'
   import RouterLink from '../components/RouterLink.svelte'
+  import DarkModeSwitch from '../components/DarkModeSwitch.svelte'
 </script>
 
 <hgroup>
@@ -35,3 +36,7 @@
   which will also slightly lower your rewards. You can set the high hashing option
   in advanced settings to increase you rewards at your own risk.
 </p>
+
+<span class="hidden">
+  <DarkModeSwitch />
+</span>
