@@ -4,6 +4,7 @@
   import IconSettings from './icons/Settings.svelte'
   import { ipc } from '../ipc'
   import DrawerFormSettings from './DrawerFormSettings.svelte'
+  import DarkModeSwitch from './DarkModeSwitch.svelte'
 
   let emailEl
   let drawerFormSettingsComp
@@ -18,6 +19,9 @@
       onClick: () => {
         ipc.send('emitOpenURL', 'https://github.com/evillt/macmineable-release')
       },
+    },
+    {
+      component: DarkModeSwitch,
     },
     {
       component: IconSettings,
