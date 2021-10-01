@@ -10,6 +10,7 @@
   import { cpuCores } from './store'
   import { checkUpdate } from './helper/checkUpdate'
   import { wsMiningLog } from './helper/wsMiningLog'
+  import TopButtons from './components/TopButtons.svelte'
 
   ipc.listen('onPageReady', (data) => {
     log('onPageReady', data)
@@ -22,5 +23,9 @@
 </script>
 
 <main class="h-screen p-6">
+  <div class="flex justify-end">
+    <TopButtons />
+  </div>
+
   <Router {routes} />
 </main>
