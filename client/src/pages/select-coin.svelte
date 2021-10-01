@@ -19,6 +19,7 @@
   import { form, preparing, isMining } from '../store'
   import { parseFormData, setFormData } from '../util/form'
   import { getStorage, setStorage } from '../util/storage'
+  import TopButtons from '../components/TopButtons.svelte'
   import { log } from '../util/log'
 
   let formEl
@@ -95,6 +96,10 @@
     setFormData(formEl, getStorage('form'))
   })
 </script>
+
+<div class="flex justify-end">
+  <TopButtons />
+</div>
 
 <sl-form bind:this={formEl}>
   <sl-select

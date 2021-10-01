@@ -10,6 +10,7 @@
   import IconFileList from '../components/icons/FileList.svelte'
   import HashratesChart from '../components/HashratesChart.svelte'
   import Drawer from '../components/Drawer.svelte'
+  import TopButtons from '../components/TopButtons.svelte'
   import { log } from '../util/log'
   import { getHashrate } from '../util/mining'
   import Link from '../components/Link.svelte'
@@ -95,11 +96,16 @@
 
 <section class="flex flex-col justify-between h-full">
   <div>
-    <div
-      class="text-blue-400 text-sm flex cursor-pointer"
-      on:click={handleBackToSelectCoin}
-    >
-      ← Back to set coin & address
+    <div class="flex justify-between items-center">
+      <div
+        class="text-blue-400 text-sm flex cursor-pointer"
+        on:click={handleBackToSelectCoin}
+      >
+        ← Back to set coin & address
+      </div>
+      <div>
+        <TopButtons />
+      </div>
     </div>
 
     <div>
