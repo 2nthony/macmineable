@@ -1,9 +1,11 @@
 import { apiv4coin } from './unMineableCoins'
 
+export const apiServer = 'https://api.unminable.com'
+
 const referralCode = 'xngb-nrye'
 
 const presetCoins = [
-  fastCoin('Ethereum', 'ETH', 'xngb-nrye'),
+  fastCoin('Ethereum', 'ETH', referralCode),
   fastCoin('Dogecoin', 'DOGE', '8jjv-jipu'),
   fastCoin('SHIBA', 'SHIB', 'c310-m2st'),
 ]
@@ -26,7 +28,7 @@ export function getReferralCode(coins, symbol) {
 
 export function validateAddress(symbol, address) {
   // return Promise.resolve(true)
-  return fetch(`https://api.unminable.com/v4/address/${address}?coin=${symbol}`)
+  return fetch(`${apiServer}/v4/address/${address}?coin=${symbol}`)
     .then((res) => res.json())
     .then((res) => !!res.success)
 }
@@ -37,7 +39,7 @@ export function getBalance(symbol, address) {
   }
 
   return fetch(
-    `https://api.unminable.com/v3/stats/${address}?tz=8&coin=${symbol}`,
+    `${apiServer}/v3/stats/${address}?tz=8&coin=${symbol}`,
   )
     .then((res) => res.json())
     .then((res) => {
