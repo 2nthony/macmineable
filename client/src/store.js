@@ -1,6 +1,4 @@
-import { writable, get } from '@svelte-use/store'
-
-export { get }
+import { writable } from '@svelte-use/shared'
 
 export const form = writable({
   symbol: '',

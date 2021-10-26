@@ -4,8 +4,7 @@ import { ipc } from '../ipc'
 import { compareVersion } from '../util/compareVersion'
 import pkg from '../../../package.json'
 import { ticker } from '../util/ticker'
-import { onDestroy } from 'svelte'
-import { now, useEventListener } from '@svelte-use/core'
+import { now, tryOnDestroy, useEventListener } from '@svelte-use/core'
 
 const appVersion = pkg.version
 
@@ -50,7 +49,7 @@ export function checkUpdate() {
     }
   })
 
-  onDestroy(() => {
+  tryOnDestroy(() => {
     checkUpdateTicker.stopTicker()
   })
 }
