@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"time"
 
 	"github.com/asaskevich/EventBus"
 	"github.com/evillt/webview"
@@ -43,7 +44,7 @@ func runApp() {
 
 	createServer()
 
-	w.Navigate(fmt.Sprintf("http://%s:%s", hostIP, hostPort))
+	w.Navigate(fmt.Sprintf("http://%s:%s?%d", hostIP, hostPort, time.Now().UnixMilli()))
 
 	w.Run()
 }
