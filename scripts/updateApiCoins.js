@@ -7,10 +7,20 @@ updateApiCoins()
 async function updateApiCoins() {
   return new Promise((resolve) => {
     https.get(`https://api.unminable.com/v4/coin`, (res) => {
-      let data = ''
+      let chunk = ''
 
-      res.on('data', (str) => (data += str))
+      res.on('data', (str) => (chunk += str))
       res.on('end', () => {
+        const data = JSON.parse(chunk)
+        data.data = data.data.map((item) => {
+          // only these is needed
+          const { symbol, name } = item
+          return {
+            symbol,
+            name,
+          }
+        })
+
         resolve(
           fs.outputFile(
             path.join(__dirname, '..', 'client/src/server/unMineableCoins.js'),
@@ -29,6 +39,6 @@ function resolveOutputFileString(data) {
 // Use a js module instead ajax
 // Updated on: ${new Date().toLocaleString()}
 
-export const apiv4coin = ${JSON.stringify(JSON.parse(data), null, 2)}
+export const apiv4coin = ${JSON.stringify(data, null, 2)}
   `.trim()
 }
