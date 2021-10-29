@@ -12,8 +12,8 @@
   },
   "dependencies": {
     "@shoelace-style/shoelace": "^2.0.0-beta.52",
-    "@svelte-use/core": "^0.9.0",
-    "@svelte-use/shared": "^0.9.0",
+    "@svelte-use/core": "^0.10.0",
+    "@svelte-use/shared": "^0.10.0",
     "c3": "^0.7.20",
     "lodash.isequal": "^4.5.0",
     "svelte-spa-router": "^3.2.0",
