@@ -10,6 +10,8 @@
   import { cpuCores } from './store'
   import { checkUpdate } from './helper/checkUpdate'
   import { wsMiningLog } from './helper/wsMiningLog'
+  import { common } from './helper/common'
+  import PromotionBanner from './components/PromotionBanner.svelte'
 
   ipc.listen('onPageReady', (data) => {
     log('onPageReady', data)
@@ -19,8 +21,13 @@
 
   checkUpdate()
   wsMiningLog()
+  common()
 </script>
 
-<main class="h-screen p-6">
-  <Router {routes} />
+<main class="flex flex-col justify-between h-screen">
+  <div class="p-6">
+    <Router {routes} />
+  </div>
+
+  <PromotionBanner />
 </main>
