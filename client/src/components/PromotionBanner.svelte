@@ -1,5 +1,5 @@
 <script>
-import { useAsyncState, readable } from '@svelte-use/core'
+import { useAsyncState, writable } from '@svelte-use/core'
 import { openUrl } from '../directives/openUrl'
 
 const promotionConfigFileUrl = `https://raw.githubusercontent.com/2nthony/macmineable-promotion-service/main/config.json`
@@ -11,13 +11,15 @@ const { state, isReady } = useAsyncState(
   }
 )
 
-$: href = readable('', set => {
+// this should be a lib similar to vue's `computed`
+const href = writable('')
+$: {
   if ($state.targetUrl) {
     const url = new URL($state.targetUrl)
     url.searchParams.set('from', 'macMineable')
-    set(url.toString())
+    $href = url.toString()
   }
-})
+}
 </script>
 
 <div class="promotion-banner relative">
