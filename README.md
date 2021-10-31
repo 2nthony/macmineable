@@ -27,11 +27,11 @@ macMineable is the unMineable 3rd-party app that can let you mining cryptocurren
 
 ## Download
 
-Download in [Releases page](https://github.com/evillt/macmineable-release/releases).
+Download in [Releases page](https://github.com/2nthony/macmineable/releases).
 
 ## Notices
 
-Since `v0.10.0` you need to read [this release](https://github.com/evillt/macmineable-release/releases/tag/v0.10.0).
+Since `v0.10.0` you need to read [this release](https://github.com/2nthony/macmineable/releases/tag/v0.10.0).
 
 We create a webserver with the host `127.0.0.1:47261` to render the UI, so make sure this host is not occupied.
 
@@ -47,11 +47,11 @@ The only reason is I'm NOT an Apple Developer.
 You can open it anyway. The app itself doesn't includes any harmful code.
 
 > Go Setting Preferences > Security & Privacy > Open anyway
-> ![](https://cdn.jsdelivr.net/gh/evillt/github-itself-image-hosting-service@main/uPic/TI6dvMsTREFI.jpg)
+> ![](https://cdn.jsdelivr.net/gh/2nthony/github-itself-image-hosting-service@main/uPic/TI6dvMsTREFI.jpg)
 
 ### Don't quit the app is mining
 
-Press the `Stop` button first. If you did, read [this](https://github.com/evillt/macmineable-release/issues/10).
+Press the `Stop` button first. If you did, read [this](https://github.com/2nthony/macmineable/issues/10).
 
 ## LICENSE
 
