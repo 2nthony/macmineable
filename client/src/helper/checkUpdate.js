@@ -8,7 +8,7 @@ import { now, tryOnDestroy, useEventListener } from '@svelte-use/core'
 
 const appVersion = pkg.version
 
-const url = `https://api.github.com/repos/evillt/macmineable-release/releases?_=${now()}&per_page=1`
+const url = `https://api.github.com/repos/2nthony/macmineable/releases?_=${now()}&per_page=1`
 let toast
 
 export function checkUpdate() {

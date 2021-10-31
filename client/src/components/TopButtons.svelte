@@ -17,7 +17,7 @@
     {
       component: IconGitHub,
       onClick: () => {
-        ipc.send('emitOpenURL', 'https://github.com/evillt/macmineable-release')
+        ipc.send('emitOpenURL', 'https://github.com/2nthony/macmineable')
       },
     },
     {
