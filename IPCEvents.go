@@ -6,7 +6,7 @@ import (
 	"os/exec"
 	"runtime"
 
-	"github.com/evillt/webview"
+	"github.com/2nthony/webview"
 	"github.com/pkg/browser"
 )
 

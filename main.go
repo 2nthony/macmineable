@@ -7,8 +7,8 @@ import (
 	"path/filepath"
 	"time"
 
+	"github.com/2nthony/webview"
 	"github.com/asaskevich/EventBus"
-	"github.com/evillt/webview"
 )
 
 var eventbus = EventBus.New()
