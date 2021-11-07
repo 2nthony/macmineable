@@ -1,11 +1,13 @@
 export function compareVersion(newVersion, currentVersion) {
   if (newVersion && currentVersion) {
-    const n = newVersion.split('.')
-    const c = currentVersion.split('.')
+    const nv = newVersion.split('.')
+    const cv = currentVersion.split('.')
 
-    for (let i = 0; i <= n.length; i++) {
-      if (Number(n[i]) > Number(c[i])) return true
-      else if (Number(n[i]) < Number(c[i])) return false
+    for (let i = 0; i <= nv.length; i++) {
+      const [n, c] = [Number(nv[i] || 0), Number(cv[i] || 0)]
+
+      if (n > c) return true
+      else if (n < c) return false
     }
   }
 
