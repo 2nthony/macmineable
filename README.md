@@ -53,6 +53,10 @@ You can open it anyway. The app itself doesn't includes any harmful code.
 
 Press the `Stop` button first. If you did, read [this](https://github.com/2nthony/macmineable/issues/10).
 
+## Sponsors
+
+[![sponsors](https://cdn.jsdelivr.net/gh/2nthony/sponsors-image/sponsors.svg)](https://github.com/sponsors/2nthony)
+
 ## LICENSE
 
 GNU GPL v3
