@@ -32,6 +32,7 @@ func registerIPCEvents(w webview.WebView) {
 		ReferralCode string `json:"referralCode"`
 		CPUUsage     int    `json:"cpuUsage"`
 	}
+
 	w.Bind("emitStartMining", func(data string) {
 		var form Form
 		json.Unmarshal([]byte(data), &form)
@@ -55,19 +56,16 @@ func registerIPCEvents(w webview.WebView) {
 
 		miningProcess = process
 	})
+
 	w.Bind("emitStopMining", func() {
 		if miningProcess != nil {
 			// prefer kill the process
 			miningProcess.Process.Kill()
 			miningProcess = nil
 			w.Eval("onMiningStopped()")
-			/* err := miningProcess.Process.Signal(os.Interrupt)
-						if err != nil {
-							w.Eval(fmt.Sprintf("onMiningStoppedError(%s)", err))
-						} else {
-			      } */
 		}
 	})
+
 	w.Bind("emitOpenURL", func(url string) {
 		browser.OpenURL(url)
 	})
