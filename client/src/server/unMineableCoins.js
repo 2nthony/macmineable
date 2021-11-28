@@ -1,6 +1,6 @@
 // https://api.unminable.com/v4/coin
 // Use a js module instead ajax
-// Updated on: 10/26/2021, 11:42:33 AM
+// Updated on: 11/28/2021, 5:28:50 PM
 
 export const apiv4coin = {
   "success": true,
@@ -25,6 +25,10 @@ export const apiv4coin = {
     {
       "symbol": "MATIC",
       "name": "MATIC (Polygon)"
+    },
+    {
+      "symbol": "SAFEMOON",
+      "name": "SafeMoon"
     },
     {
       "symbol": "SHIB",
