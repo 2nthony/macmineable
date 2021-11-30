@@ -1,5 +1,8 @@
 # macMineable (unMineable for macOS)
 
+![](https://img.shields.io/github/v/release/2nthony/macmineable?label=)
+![](https://img.shields.io/github/downloads/2nthony/macmineable/total)
+
 <a href="https://www.producthunt.com/posts/macmineable?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-macmineable" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=305377&theme=light" alt="macMineable - unMineable for macOS, 3rd-party. | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
 
 _macOS 11 or above_
@@ -59,4 +62,4 @@ Press the `Stop` button first. If you did, read [this](https://github.com/2nthon
 
 ## LICENSE
 
-GNU GPL v3
+GNU GPL v3 © [2nthony](https://github.com/2nthony).
