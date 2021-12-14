@@ -1,26 +1,22 @@
 // https://api.unminable.com/v4/coin
 // Use a js module instead ajax
-// Updated on: 11/28/2021, 5:28:50 PM
+// Updated on: 12/14/2021, 11:55:23 AM
 
 export const apiv4coin = {
   "success": true,
   "msg": "Ok",
   "data": [
     {
-      "symbol": "1INCH",
-      "name": "1inch"
-    },
-    {
       "symbol": "CAKE",
       "name": "PancakeSwap"
     },
     {
-      "symbol": "CHZ",
-      "name": "Chiliz"
+      "symbol": "CRO",
+      "name": "Crypto.com Coin"
     },
     {
-      "symbol": "HOT",
-      "name": "Holo"
+      "symbol": "ELON",
+      "name": "Dogelon Mars"
     },
     {
       "symbol": "MATIC",
@@ -31,12 +27,20 @@ export const apiv4coin = {
       "name": "SafeMoon"
     },
     {
+      "symbol": "SAITAMA",
+      "name": "Saitama Inu"
+    },
+    {
       "symbol": "SHIB",
       "name": "SHIBA INU"
     },
     {
       "symbol": "SOL",
       "name": "Solana"
+    },
+    {
+      "symbol": "1INCH",
+      "name": "1inch"
     },
     {
       "symbol": "AAVE",
@@ -83,6 +87,10 @@ export const apiv4coin = {
       "name": "BitTorrent"
     },
     {
+      "symbol": "CHZ",
+      "name": "Chiliz"
+    },
+    {
       "symbol": "DASH",
       "name": "Dash"
     },
@@ -112,11 +120,15 @@ export const apiv4coin = {
     },
     {
       "symbol": "FUN",
-      "name": "FunFair"
+      "name": "FUNToken"
     },
     {
       "symbol": "GAS",
       "name": "GAS"
+    },
+    {
+      "symbol": "HOT",
+      "name": "Holo"
     },
     {
       "symbol": "ICX",
