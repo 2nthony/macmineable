@@ -1,6 +1,6 @@
 // Modified from https://github.com/kirinlabs/execshell/blob/master/main.go
 
-package main
+package lib
 
 import (
 	"fmt"
@@ -35,7 +35,7 @@ func asyncLog(reader io.ReadCloser) error {
 					bucket = bucket[:0]
 				}
 				fmt.Printf("%v\n", line)
-				eventbus.Publish("cmd:log", line)
+				Event.Publish("cmd:log", line)
 			}
 		}
 	}

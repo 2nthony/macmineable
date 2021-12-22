@@ -1,4 +1,4 @@
-package main
+package lib
 
 import (
 	"fmt"
@@ -8,7 +8,7 @@ import (
 	"github.com/gorilla/websocket"
 )
 
-func registerRoutes() {
+func RegisterRoutes() {
 	http.Handle("/", http.FileServer(http.Dir("dist")))
 	http.HandleFunc("/mining-log", serveWsMiningLog)
 }
@@ -23,7 +23,7 @@ func serveWsMiningLog(w http.ResponseWriter, r *http.Request) {
 	// Don't close ws
 	// defer ws.Close()
 
-	eventbus.Subscribe("cmd:log", func(line string) {
+	Event.Subscribe("cmd:log", func(line string) {
 		writeMessageErr := ws.WriteMessage(websocket.TextMessage, []byte(line))
 		if writeMessageErr != nil {
 			fmt.Printf("writeMessageErr: %v\n", writeMessageErr)
