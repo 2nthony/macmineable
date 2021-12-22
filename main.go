@@ -2,16 +2,14 @@ package main
 
 import (
 	"fmt"
+	"macMineable/lib"
 	"net/http"
 	"os"
 	"path/filepath"
 	"time"
 
 	"github.com/2nthony/webview"
-	"github.com/asaskevich/EventBus"
 )
-
-var eventbus = EventBus.New()
 
 const (
 	hostIP   = "127.0.0.1"
@@ -37,7 +35,7 @@ func runApp() {
 	w := webview.New(true)
 	defer w.Destroy()
 
-	registerIPCEvents(w)
+	lib.RegisterIPCEvents(w)
 
 	w.SetTitle("macMineable")
 	w.SetSize(400, 650, webview.HintFixed)
@@ -50,7 +48,7 @@ func runApp() {
 }
 
 func createServer() {
-	registerRoutes()
+	lib.RegisterRoutes()
 
 	go func() {
 		fmt.Println(http.ListenAndServe(fmt.Sprintf("%s:%s", hostIP, hostPort), nil))

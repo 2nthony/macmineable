@@ -1,4 +1,4 @@
-package main
+package lib
 
 import (
 	"encoding/json"
@@ -11,7 +11,7 @@ import (
 )
 
 // client events
-func registerIPCEvents(w webview.WebView) {
+func RegisterIPCEvents(w webview.WebView) {
 	var miningProcess *exec.Cmd
 	minerPath := Ternay(IsIntel(), "assets/miner/xmrig", "assets/miner/xmrig-m1")
 
