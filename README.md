@@ -44,13 +44,17 @@ We create a webserver with the host `127.0.0.1:47261` to render the UI, so make 
 - Macbook 12-inch with Intel M-5Y31 chip, big sur 11.1
 - Thanks to [@yoobanz](https://twitter.com/yoobandz) helping me tested on M1 device. https://twitter.com/yoobandz/status/1430951939177603079
 
-### Unidentified developer
+### Issues
 
-The only reason is I'm NOT an Apple Developer.  
-You can open it anyway. The app itself doesn't includes any harmful code.
+When you have issues with running, read these below may help:
 
-> Go Setting Preferences > Security & Privacy > Open anyway
-> ![](https://cdn.jsdelivr.net/gh/2nthony/github-itself-image-hosting-service@main/uPic/TI6dvMsTREFI.jpg)
+<details><summary>"xmrig" cannot be opened because the developer can not be verified.</summary>
+
+![](https://cdn.jsdelivr.net/gh/2nthony/statics@main/uPic/Wp0a7nt8ebm9.jpg)
+![](https://cdn.jsdelivr.net/gh/2nthony/statics@main/uPic/RKucH35GQxQl.jpg)
+![](https://cdn.jsdelivr.net/gh/2nthony/statics@main/uPic/YkYIDNGJTmnE.jpg)
+
+</details>
 
 ### Don't quit the app is mining
 
