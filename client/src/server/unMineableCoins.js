@@ -1,15 +1,11 @@
 // https://api.unminable.com/v4/coin
 // Use a js module instead ajax
-// Updated on: 12/14/2021, 11:55:23 AM
+// Updated on: 2/19/2022, 1:47:39 PM
 
 export const apiv4coin = {
   "success": true,
   "msg": "Ok",
   "data": [
-    {
-      "symbol": "CAKE",
-      "name": "PancakeSwap"
-    },
     {
       "symbol": "CRO",
       "name": "Crypto.com Coin"
@@ -19,24 +15,20 @@ export const apiv4coin = {
       "name": "Dogelon Mars"
     },
     {
-      "symbol": "MATIC",
-      "name": "MATIC (Polygon)"
-    },
-    {
-      "symbol": "SAFEMOON",
-      "name": "SafeMoon"
+      "symbol": "FTM",
+      "name": "Fantom"
     },
     {
       "symbol": "SAITAMA",
       "name": "Saitama Inu"
     },
     {
-      "symbol": "SHIB",
-      "name": "SHIBA INU"
+      "symbol": "SFM",
+      "name": "SafeMoon (V2)"
     },
     {
-      "symbol": "SOL",
-      "name": "Solana"
+      "symbol": "SHIB",
+      "name": "SHIBA INU"
     },
     {
       "symbol": "1INCH",
@@ -85,6 +77,10 @@ export const apiv4coin = {
     {
       "symbol": "BTT",
       "name": "BitTorrent"
+    },
+    {
+      "symbol": "CAKE",
+      "name": "PancakeSwap"
     },
     {
       "symbol": "CHZ",
@@ -159,6 +155,10 @@ export const apiv4coin = {
       "name": "Decentraland"
     },
     {
+      "symbol": "MATIC",
+      "name": "MATIC (Polygon)"
+    },
+    {
       "symbol": "MTL",
       "name": "Metal"
     },
@@ -187,12 +187,20 @@ export const apiv4coin = {
       "name": "Ravencoin"
     },
     {
+      "symbol": "SAFEMOON",
+      "name": "SafeMoon (V2)"
+    },
+    {
       "symbol": "SC",
       "name": "Siacoin"
     },
     {
       "symbol": "SKY",
       "name": "Skycoin"
+    },
+    {
+      "symbol": "SOL",
+      "name": "Solana"
     },
     {
       "symbol": "SUSHI",
