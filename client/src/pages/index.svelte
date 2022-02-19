@@ -10,7 +10,7 @@
   <h6 class="text-xs text-green-500">
     3rd-party unMineable for macOS. Made by
     <Link
-      url="https://twitter.com/evillt"
+      url="https://twitter.com/_2nthony"
       class="underline hover:text-indigo-500">2nthony</Link
     >.
   </h6>
