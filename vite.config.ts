@@ -27,7 +27,7 @@ export default defineConfig(({ command }) => {
         find: /^@svelte-use\/(.*)/,
         replacement: path.resolve(
           __dirname,
-          '../../../dev/svelte-use/packages/$1/dist/index.mjs',
+          '../svelte-use/packages/$1/dist/index.mjs',
         ),
       },
     ]
