@@ -1,26 +1,22 @@
 // https://api.unminable.com/v4/coin
 // Use a js module instead ajax
-// Updated on: 2/19/2022, 1:47:39 PM
+// Updated on: 3/20/2022, 11:11:10 AM
 
 export const apiv4coin = {
   "success": true,
   "msg": "Ok",
   "data": [
     {
+      "symbol": "BABYDOGE",
+      "name": "Baby Doge"
+    },
+    {
       "symbol": "CRO",
       "name": "Crypto.com Coin"
     },
     {
-      "symbol": "ELON",
-      "name": "Dogelon Mars"
-    },
-    {
       "symbol": "FTM",
       "name": "Fantom"
-    },
-    {
-      "symbol": "SAITAMA",
-      "name": "Saitama Inu"
     },
     {
       "symbol": "SFM",
@@ -97,6 +93,10 @@ export const apiv4coin = {
     {
       "symbol": "DOGE",
       "name": "Dogecoin"
+    },
+    {
+      "symbol": "ELON",
+      "name": "Dogelon Mars"
     },
     {
       "symbol": "ENJ",
@@ -189,6 +189,10 @@ export const apiv4coin = {
     {
       "symbol": "SAFEMOON",
       "name": "SafeMoon (V2)"
+    },
+    {
+      "symbol": "SAITAMA",
+      "name": "Saitama Inu"
     },
     {
       "symbol": "SC",
