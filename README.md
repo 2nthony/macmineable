@@ -1,3 +1,6 @@
+> ⚡️ This is not working anymore, since I switched my device to Macbook Air M1, so I had to stop the development.  
+> My case is: can not connect to unmineable server.
+
 # macMineable (unMineable for macOS)
 
 ![](https://img.shields.io/github/v/release/2nthony/macmineable?label=)
